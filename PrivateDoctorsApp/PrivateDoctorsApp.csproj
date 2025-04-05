@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7374F329-414D-4421-8551-69564F5560B9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>PrivateDoctorsApp</RootNamespace>
+    <AssemblyName>PrivateDoctorsApp</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=5.2.1.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.5.2.1\lib\net462\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=5.2.1.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.5.2.1\lib\net462\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\CurrentUser.cs" />
+    <Compile Include="Model\RelayCommand.cs" />
+    <Compile Include="ViewModel\Admin\ChangeDoctorViewModel.cs" />
+    <Compile Include="ViewModel\Admin\AdminAccountancyViewModel.cs" />
+    <Compile Include="ViewModel\Admin\AdminDoctorsViewModel.cs" />
+    <Compile Include="ViewModel\Admin\AdminServicesViewModel.cs" />
+    <Compile Include="ViewModel\Admin\ChangeServiceViewModel.cs" />
+    <Compile Include="ViewModel\Doctor\AddScheduleViewModel.cs" />
+    <Compile Include="ViewModel\Admin\AdminMainViewModel.cs" />
+    <Compile Include="ViewModel\Doctor\ChangeScheduleViewModel.cs" />
+    <Compile Include="ViewModel\Doctor\DeleteScheduleViewModel.cs" />
+    <Compile Include="ViewModel\Doctor\DoctorAppointmentsViewModel.cs" />
+    <Compile Include="ViewModel\Doctor\DoctorMainPageViewModel.cs" />
+    <Compile Include="ViewModel\Doctor\DoctorMainViewModel.cs" />
+    <Compile Include="ViewModel\Doctor\DoctorScheduleViewModel.cs" />
+    <Compile Include="ViewModel\Doctor\NotificationsViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\PasswordRecoveryViewModel.cs" />
+    <Compile Include="ViewModel\Patient\PatientMainPageViewModel.cs" />
+    <Compile Include="ViewModel\Patient\PatientMainViewModel.cs" />
+    <Compile Include="ViewModel\Patient\PatientSearchViewModel.cs" />
+    <Compile Include="View\Admin\ChangeDoctorWindow.xaml.cs">
+      <DependentUpon>ChangeDoctorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Admin\AdminDoctorsPage.xaml.cs">
+      <DependentUpon>AdminDoctorsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Admin\AdminServicesPage.xaml.cs">
+      <DependentUpon>AdminServicesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Admin\ChangeServiceWindow.xaml.cs">
+      <DependentUpon>ChangeServiceWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doctor\AddScheduleWindow.xaml.cs">
+      <DependentUpon>AddScheduleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Admin\AdminAccountancyPage.xaml.cs">
+      <DependentUpon>AdminAccountancyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Admin\AdminAppointmentsPage.xaml.cs">
+      <DependentUpon>AdminAppointmentsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Admin\AdminMainPage.xaml.cs">
+      <DependentUpon>AdminMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Admin\AdminMainWindow.xaml.cs">
+      <DependentUpon>AdminMainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Admin\AdminSchedulesPage.xaml.cs">
+      <DependentUpon>AdminSchedulesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doctor\ChangeScheduleWindow.xaml.cs">
+      <DependentUpon>ChangeScheduleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doctor\DeleteScheduleWindow.xaml.cs">
+      <DependentUpon>DeleteScheduleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doctor\DoctorSchedulePage.xaml.cs">
+      <DependentUpon>DoctorSchedulePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doctor\DoctorMainPage.xaml.cs">
+      <DependentUpon>DoctorMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doctor\DoctorMainWindow.xaml.cs">
+      <DependentUpon>DoctorMainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doctor\DoctorAppointmentsPage.xaml.cs">
+      <DependentUpon>DoctorAppointmentsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doctor\NotificationsWindow.xaml.cs">
+      <DependentUpon>NotificationsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PasswordRecoveryWindow.xaml.cs">
+      <DependentUpon>PasswordRecoveryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientMainPage.xaml.cs">
+      <DependentUpon>PatientMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientMainWindow.xaml.cs">
+      <DependentUpon>PatientMainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientPersonalPage.xaml.cs">
+      <DependentUpon>PatientPersonalPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientSearchPage.xaml.cs">
+      <DependentUpon>PatientSearchPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\Appointment.cs">
+      <DependentUpon>PrivateDoctorsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DoctorService.cs">
+      <DependentUpon>PrivateDoctorsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Employee.cs">
+      <DependentUpon>PrivateDoctorsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Notification.cs">
+      <DependentUpon>PrivateDoctorsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Patient.cs">
+      <DependentUpon>PrivateDoctorsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Payment.cs">
+      <DependentUpon>PrivateDoctorsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PrivateDoctorsModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrivateDoctorsModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PrivateDoctorsModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrivateDoctorsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PrivateDoctorsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrivateDoctorsModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Professional.cs">
+      <DependentUpon>PrivateDoctorsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Schedule.cs">
+      <DependentUpon>PrivateDoctorsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Service.cs">
+      <DependentUpon>PrivateDoctorsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\User.cs">
+      <DependentUpon>PrivateDoctorsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EntityDeploy Include="Model\PrivateDoctorsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PrivateDoctorsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\PrivateDoctorsModel.edmx.diagram">
+      <DependentUpon>PrivateDoctorsModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\Login.ico" />
+    <Resource Include="Assets\Recovery.ico" />
+    <Resource Include="Assets\Main.ico" />
+    <Resource Include="Assets\Doctor.ico" />
+    <Resource Include="Assets\Add.ico" />
+    <Resource Include="Assets\Change.ico" />
+    <Resource Include="Assets\Delete.ico" />
+    <Content Include="Model\PrivateDoctorsModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PrivateDoctorsModel.edmx</DependentUpon>
+      <LastGenOutput>PrivateDoctorsModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\PrivateDoctorsModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PrivateDoctorsModel.edmx</DependentUpon>
+      <LastGenOutput>PrivateDoctorsModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="View\Admin\ChangeDoctorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Admin\AdminDoctorsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Admin\AdminServicesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Admin\ChangeServiceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\AddScheduleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Admin\AdminAccountancyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Admin\AdminAppointmentsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Admin\AdminMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Admin\AdminMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Admin\AdminSchedulesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\ChangeScheduleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\DeleteScheduleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\DoctorSchedulePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\DoctorMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\DoctorMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\DoctorAppointmentsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\NotificationsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PasswordRecoveryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientPersonalPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientSearchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\MaterialDesignThemes.5.2.1\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.5.2.1\build\MaterialDesignThemes.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
+  <Import Project="..\packages\MaterialDesignThemes.5.2.1\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.5.2.1\build\MaterialDesignThemes.targets')" />
+</Project>

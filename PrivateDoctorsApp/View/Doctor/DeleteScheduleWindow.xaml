@@ -1,0 +1,41 @@
+﻿<Window x:Class="PrivateDoctorsApp.View.Doctor.DeleteScheduleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrivateDoctorsApp.View.Doctor"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Icon="../../Assets/Delete.ico"
+            Title="Видалити графік" Height="200" Width="274">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ComboBox Grid.Row="0" 
+                  Width="200" 
+                  Margin="5"
+                  Padding="5"
+                  BorderThickness="2"
+                  BorderBrush="Gray"
+                  Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                  SelectedItem="{Binding WorkDate}"
+                  ItemsSource="{Binding ScheduleDates}"
+                  materialDesign:HintAssist.Hint="Дата">
+        </ComboBox>
+        <ComboBox Grid.Row="1" 
+                  Width="200" 
+                  Margin="5"
+                  Padding="5"
+                  BorderThickness="2"
+                  BorderBrush="Gray"
+                  Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                  SelectedItem="{Binding AppointmentStart}"
+                  ItemsSource="{Binding ScheduleStarts}"
+                  materialDesign:HintAssist.Hint="Початок зустрічі">
+        </ComboBox>
+        <Button Grid.Row="2" Margin="0,0,0,20"  VerticalAlignment="Bottom" FontFamily="Segoe UI" FontWeight="Black" Content="Видалити"  BorderThickness="0" Background="#009688" Height="30" Width="200" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5"  Foreground="White" Command="{Binding DeleteScheduleCommand}"/>
+    </Grid>
+</Window>

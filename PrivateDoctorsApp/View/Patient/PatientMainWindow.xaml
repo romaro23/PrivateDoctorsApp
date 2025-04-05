@@ -1,0 +1,45 @@
+﻿<Window x:Class="PrivateDoctorsApp.View.Patient.PatientMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrivateDoctorsApp.View.Patient"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Icon="../../Assets/Main.ico"
+        Title="Головна сторінка" Height="700" Width="1100" Background="#FFD8DEE1" ResizeMode="NoResize">
+    <Grid>
+        <Grid VerticalAlignment="Top" Background="White" Height="55" Width="1100">
+            <Grid.Effect>
+                <DropShadowEffect Color="#FFB8C0C4" BlurRadius="10" ShadowDepth="3"/>
+            </Grid.Effect>
+            <StackPanel Margin="15,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                <materialDesign:PackIcon Height="35" Width="35" Foreground="#009688" Kind="Doctor" />
+                <TextBlock Text="HealthCare Portal" 
+           FontSize="25"  
+           FontFamily="Segoe UI" 
+           FontWeight="Bold"
+           Foreground="#009688"/>
+            </StackPanel>
+            <Button  FontFamily="Segoe UI" FontWeight="Black" Content="Вийти" Margin="0,0,30,0" HorizontalAlignment="Right" BorderThickness="0" Background="#FFDE3333" Width="100" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5" Foreground="White" Command="{Binding LogoutCommand}"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="550" Background="White" Margin="0,60,0,22" Width="200">
+            <Grid.Effect>
+                <DropShadowEffect Color="#FFB8C0C4" BlurRadius="10" ShadowDepth="3"/>
+            </Grid.Effect>
+            <StackPanel>
+                <Button FontSize="18" Padding="0" HorizontalContentAlignment="Left" Height="25" FontFamily="Segoe UI" FontWeight="Bold" Content="Головна сторінка" Margin="10" BorderThickness="0" Background="Transparent" Foreground="#009688" Style="{StaticResource MaterialDesignFlatLightButton}" Command="{Binding NavigateCommand}" CommandParameter="Main"/>
+                <!--<Button FontSize="18" Padding="0" HorizontalContentAlignment="Left" Height="25" FontFamily="Segoe UI" FontWeight="Bold" Content="Особистий кабінет" Margin="10" BorderThickness="0" Background="Transparent" Foreground="#009688" Style="{StaticResource MaterialDesignFlatLightButton}" Command="{Binding NavigateCommand}" CommandParameter="Personal"/>-->
+                <Button FontSize="18" Padding="0" HorizontalContentAlignment="Left" Height="47" FontFamily="Segoe UI" FontWeight="Bold" Margin="10" BorderThickness="0" Background="Transparent" Foreground="#009688" Style="{StaticResource MaterialDesignFlatLightButton}" Command="{Binding NavigateCommand}" CommandParameter="Search">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Пошук лікарів та послуг" TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="200,60,0,22" Height="550" Width="840"/>
+        
+    </Grid>
+</Window>

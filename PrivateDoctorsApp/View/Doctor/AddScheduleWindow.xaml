@@ -1,0 +1,48 @@
+﻿<Window x:Class="PrivateDoctorsApp.View.Doctor.AddScheduleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrivateDoctorsApp.View.Doctor"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Icon="../../Assets/Add.ico"
+        Title="Додати графік" Height="200" Width="274">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DatePicker SelectedDate="{Binding WorkDate, Mode=TwoWay}" Grid.Row="0"
+                    Width="200"
+                    BorderThickness="2"
+                    BorderBrush="Gray"
+                    materialDesign:TextFieldAssist.TextFieldCornerRadius="5"  
+                     Padding="5" Margin="5"
+                    materialDesign:HintAssist.Hint="Дата"
+                    materialDesign:TextFieldAssist.HasClearButton="True"
+                    Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+        <materialDesign:TimePicker SelectedTime="{Binding AppointmentStart, Mode=TwoWay}" Grid.Row="1"
+                    Width="200"
+                    BorderThickness="2"
+                    BorderBrush="Gray"
+                    materialDesign:TextFieldAssist.TextFieldCornerRadius="5"  
+                     Padding="5" Margin="5"
+                    materialDesign:HintAssist.Hint="Початок зустрічі"
+                    materialDesign:TextFieldAssist.HasClearButton="True"
+                     />
+        <materialDesign:TimePicker SelectedTime="{Binding AppointmentEnd, Mode=TwoWay}" Grid.Row="2"
+                                   
+                    Width="200"
+                    BorderThickness="2"
+                    BorderBrush="Gray"
+                    materialDesign:TextFieldAssist.TextFieldCornerRadius="5"  
+                     Padding="5" Margin="5"
+                    materialDesign:HintAssist.Hint="Кінець зустрічі"
+                    materialDesign:TextFieldAssist.HasClearButton="True"
+                     />
+        <Button Grid.Row="3" Margin="0,0,0,10"  VerticalAlignment="Bottom" FontFamily="Segoe UI" FontWeight="Black" Content="Додати"  BorderThickness="0" Background="#009688" Height="30" Width="200" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5"  Foreground="White" Command="{Binding AddScheduleCommand}"/>
+    </Grid>
+</Window>

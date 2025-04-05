@@ -1,0 +1,206 @@
+﻿<Page x:Class="PrivateDoctorsApp.View.Doctor.DoctorMainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PrivateDoctorsApp.View.Doctor"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="840"
+      Title="DoctorMainPage">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+            <Border CornerRadius="20" Background="White" Padding="15" Margin="5">
+                <Border.Effect>
+                    <DropShadowEffect Color="#FFB8C0C4" BlurRadius="10" ShadowDepth="3"/>
+                </Border.Effect>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <!-- Перша колонка -->
+                    <ColumnDefinition Width="*" />
+                    <!-- Друга колонка -->
+                    <ColumnDefinition Width="*" />
+                    <!-- Третя колонка -->
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Перша колонка -->
+                <StackPanel Grid.Column="0" Margin="10">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="Прізвище:" FontWeight="Bold"/>
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="{Binding PersonalData_.LastName}" Margin="10,0,0,15"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="Ім'я:" FontWeight="Bold"/>
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="{Binding PersonalData_.FirstName}" Margin="10,0,0,15"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="По батькові:" FontWeight="Bold"/>
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="{Binding PersonalData_.MiddleName}" Margin="10,0,0,15"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="Контактний номер:" FontWeight="Bold"/>
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="{Binding PersonalData_.ContactNumber}" Margin="10,0,0,15"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="10">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="Email:" FontWeight="Bold"/>
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="{Binding PersonalData_.Email}" Margin="10,0,0,15"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="Адреса:" FontWeight="Bold"/>
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="{Binding PersonalData_.Address}" Margin="10,0,0,15"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="Логін:" FontWeight="Bold"/>
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="{Binding PersonalData_.Username}" Margin="10,0,0,15"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="Пароль:" FontWeight="Bold"/>
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="{Binding PersonalData_.Password}" Margin="10,0,0,15"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Третя колонка -->
+                <StackPanel Grid.Column="2" Margin="10">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="Спеціалізація:" FontWeight="Bold"/>
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="{Binding PersonalData_.Specialization}" Margin="10,0,0,15"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="Досвід (роки):" FontWeight="Bold"/>
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="{Binding PersonalData_.ExperienceYears}" Margin="10,0,0,15"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="Освіта:" FontWeight="Bold"/>
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="{Binding PersonalData_.Education}" Margin="10,0,0,15"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="Рейтинг:" FontWeight="Bold"/>
+                        <TextBlock Foreground="#009688" FontFamily="Segoe UI" Text="{Binding PersonalData_.Rating}" Margin="10,0,0,15"/>
+                    </StackPanel>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+                            
+        <Border Grid.Row="1" CornerRadius="20" Background="White" Padding="15" Margin="5">
+            <Border.Effect>
+                <DropShadowEffect Color="#FFB8C0C4" BlurRadius="10" ShadowDepth="3"/>
+            </Border.Effect>
+            <Grid>
+                <TextBlock HorizontalAlignment="Left" Width="130" Margin="0,110,0,0" Text="Ваші пацієнти" FontSize="12" FontFamily="Segoe UI" FontWeight="Bold"
+                           Foreground="#009688">
+                    <TextBlock.RenderTransform>
+                        <RotateTransform Angle="270"/>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <DataGrid Margin="25,0,0,0" CanUserResizeRows="False" CanUserResizeColumns="False"  VerticalAlignment="Top" ItemsSource="{Binding Patients}" AutoGenerateColumns="False"
+                          CanUserAddRows="False" IsReadOnly="True" HeadersVisibility="Column"
+                          GridLinesVisibility="None"
+                          RowBackground="White"
+                          AlternatingRowBackground="#F7F9FC"
+                          BorderThickness="0">
+
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="Background" Value="#009688"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Padding" Value="8"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Height" Value="40"/>
+                            <Setter Property="FontSize" Value="14"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Background" Value="White"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#80CBC4"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Пацієнт" Binding="{Binding PatientName}" Width="*" />
+                        <DataGridTextColumn Header="Дата народження" Binding="{Binding FormattedDateOfBirth}" Width="*" />
+                        <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="*" />
+                        <DataGridTextColumn Header="Пошта" Binding="{Binding Email}" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+            <Border Grid.Row="2" CornerRadius="20" Background="White" Padding="15" Margin="5">
+                <Border.Effect>
+                    <DropShadowEffect Color="#FFB8C0C4" BlurRadius="10" ShadowDepth="3"/>
+                </Border.Effect>
+                <Grid>
+                    <TextBlock Margin="0,130,0,0" Text="Останні сповіщення" FontSize="12" FontFamily="Segoe UI" HorizontalAlignment="Left" Height="30" FontWeight="Bold"
+                               Foreground="#009688">
+                        <TextBlock.RenderTransform>
+                            <RotateTransform Angle="270"/>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+
+                <ItemsControl Margin="0,0,0,10" HorizontalAlignment="Center" ItemsSource="{Binding Notifications}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="0" CornerRadius="15" Padding="10" Margin="5,20,5,5" Width="230">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#33B2A3" Offset="0"/>
+                                        <GradientStop Color="#009688" Offset="1"/>
+                                    </LinearGradientBrush>
+                                    </Border.Background>
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding FormattedDate}" FontSize="16" FontWeight="Bold" Foreground="White" 
+                                                   VerticalAlignment="Top"/>
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding Description}" FontSize="12" FontWeight="Bold" Foreground="White" 
+                                                   VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                        <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding PatientName}" FontSize="12" FontWeight="Bold" Foreground="White" 
+                                                   VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+                                </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="14" Padding="0" HorizontalContentAlignment="Left" Height="25" FontFamily="Segoe UI" FontWeight="Bold" Content="Всі сповіщення" Margin="5" BorderThickness="0" Background="Transparent" Foreground="#009688" Style="{StaticResource MaterialDesignFlatLightButton}" Command="{Binding ViewNotificationsCommand}" CommandParameter="Schedule"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>
