@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using PrivateDoctorsApp.Model;
@@ -66,16 +63,27 @@ namespace PrivateDoctorsApp.ViewModel.Admin
         public ICommand OpenAddServiceWindowCommand { get; }
         public ICommand OpenChangeServiceWindowCommand { get; }
         public ICommand OpenDeleteServiceWindowCommand { get; }
+        public ICommand AddDoctorToServiceCommand { get; }
         private bool CanChangeOrDelete()
         {
             return ID.HasValue;
         }
         public AdminServicesViewModel()
         {
+            AddDoctorToServiceCommand = new RelayCommand(OpenAddDoctorToServiceWindow);
             OpenAddServiceWindowCommand = new RelayCommand(OpenAddServiceWindow);
             OpenChangeServiceWindowCommand = new RelayCommand(OpenChangeServiceWindow, CanChangeOrDelete);
             OpenDeleteServiceWindowCommand = new RelayCommand(OpenDeleteServiceWindow, CanChangeOrDelete);
             LoadServices();
+        }
+
+        private void OpenAddDoctorToServiceWindow(object parameter)
+        {
+            var service = parameter as ServiceItem;
+            AddDoctorToServiceWindow window = new AddDoctorToServiceWindow();
+            var viewModel = new AddDoctorToServiceViewModel(service);
+            window.DataContext = viewModel;
+            window.Show();
         }
         private void OpenAddServiceWindow(object parameter)
         {

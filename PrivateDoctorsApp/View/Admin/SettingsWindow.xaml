@@ -1,0 +1,45 @@
+﻿<Window x:Class="PrivateDoctorsApp.View.Admin.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrivateDoctorsApp.View.Admin"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Icon="../../Assets/Settings.ico"
+        Title="Налаштування" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="{Binding Path, UpdateSourceTrigger=PropertyChanged}" BorderThickness="2" Margin="5" HorizontalAlignment="Center" Padding="5"
+                         Width="180" Height="30" Style="{StaticResource MaterialDesignTextBox}"
+                         materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
+                         materialDesign:HintAssist.Hint="Шлях для збереження"
+                />
+                <Button Padding="0" Margin="10,0" BorderThickness="0" Background="Transparent" Command="{Binding SelectPathCommand}">
+                    <materialDesign:PackIcon Kind="Folder" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" />
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <DatePicker SelectedDate="{Binding StartDate, Mode=TwoWay}"
+                            Width="115"
+                            BorderThickness="2"
+                            BorderBrush="Gray"
+                            materialDesign:TextFieldAssist.TextFieldCornerRadius="5"  
+                            Padding="5" Margin="5"
+                            materialDesign:HintAssist.Hint="Дата початку"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                <DatePicker SelectedDate="{Binding EndDate, Mode=TwoWay}"
+                            Width="115"
+                            BorderThickness="2"
+                            BorderBrush="Gray"
+                            materialDesign:TextFieldAssist.TextFieldCornerRadius="5"  
+                            Padding="5" Margin="5"
+                            materialDesign:HintAssist.Hint="Дата кінця"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

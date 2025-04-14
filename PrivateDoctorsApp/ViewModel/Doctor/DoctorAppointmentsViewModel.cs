@@ -4,10 +4,8 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using PrivateDoctorsApp.Model;
-using static PrivateDoctorsApp.ViewModel.Doctor.DoctorMainPageViewModel;
 
 namespace PrivateDoctorsApp.ViewModel.Doctor
 {

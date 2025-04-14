@@ -21,7 +21,15 @@
        FontWeight="Bold"
        Foreground="#009688"/>
             </StackPanel>
-            <Button  FontFamily="Segoe UI" FontWeight="Black" Content="Вийти" Margin="0,0,30,0" HorizontalAlignment="Right" BorderThickness="0" Background="#FFDE3333" Width="100" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5" Foreground="White" Command="{Binding LogoutCommand}"/>
+            <StackPanel Margin="0,0,30,0" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button Padding="0" Margin="10,0" BorderThickness="0" Background="Transparent" Command="{Binding SettingsCommand}">
+                    <materialDesign:PackIcon Kind="DatabaseCogOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" />
+                </Button>
+                <Button Padding="0" Margin="10,0" BorderThickness="0" Background="Transparent" Command="{Binding BackupCommand}">
+                    <materialDesign:PackIcon Kind="BackupRestore" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" />
+                </Button>
+                <Button  FontFamily="Segoe UI" FontWeight="Black" Content="Вийти"  HorizontalAlignment="Right" BorderThickness="0" Background="#FFDE3333" Width="100" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5" Foreground="White" Command="{Binding LogoutCommand}"/>
+            </StackPanel>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="550" Background="White" Margin="0,60,0,22" Width="200">
             <Grid.Effect>
@@ -34,6 +42,7 @@
                 <Button FontSize="18" Padding="0" HorizontalContentAlignment="Left" Height="25" FontFamily="Segoe UI" FontWeight="Bold" Content="Звітність" Margin="10" BorderThickness="0" Background="Transparent" Foreground="#009688" Style="{StaticResource MaterialDesignFlatLightButton}" Command="{Binding NavigateCommand}" CommandParameter="Accountancy"/>
                 <Button FontSize="18" Padding="0" HorizontalContentAlignment="Left" Height="25" FontFamily="Segoe UI" FontWeight="Bold" Content="Послуги" Margin="10" BorderThickness="0" Background="Transparent" Foreground="#009688" Style="{StaticResource MaterialDesignFlatLightButton}" Command="{Binding NavigateCommand}" CommandParameter="Services"/>
                 <Button FontSize="18" Padding="0" HorizontalContentAlignment="Left" Height="25" FontFamily="Segoe UI" FontWeight="Bold" Content="Лікарі" Margin="10" BorderThickness="0" Background="Transparent" Foreground="#009688" Style="{StaticResource MaterialDesignFlatLightButton}" Command="{Binding NavigateCommand}" CommandParameter="Doctors"/>
+                <Button FontSize="18" Padding="0" HorizontalContentAlignment="Left" Height="25" FontFamily="Segoe UI" FontWeight="Bold" Content="Журнал дій" Margin="10" BorderThickness="0" Background="Transparent" Foreground="#009688" Style="{StaticResource MaterialDesignFlatLightButton}" Command="{Binding NavigateCommand}" CommandParameter="Logs"/>
             </StackPanel>
         </Grid>
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="200,60,0,22" Height="550" Width="840"/>

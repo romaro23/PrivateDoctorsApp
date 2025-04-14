@@ -58,6 +58,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -81,12 +82,20 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\CurrentUser.cs" />
+    <Compile Include="Model\Log.cs">
+      <DependentUpon>PrivateDoctorsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LogEventBase.cs" />
     <Compile Include="Model\RelayCommand.cs" />
+    <Compile Include="ViewModel\Admin\AddDoctorToServiceViewModel.cs" />
+    <Compile Include="ViewModel\Admin\AdminLogsViewModel.cs" />
+    <Compile Include="ViewModel\Admin\BackupViewModel.cs" />
     <Compile Include="ViewModel\Admin\ChangeDoctorViewModel.cs" />
     <Compile Include="ViewModel\Admin\AdminAccountancyViewModel.cs" />
     <Compile Include="ViewModel\Admin\AdminDoctorsViewModel.cs" />
     <Compile Include="ViewModel\Admin\AdminServicesViewModel.cs" />
     <Compile Include="ViewModel\Admin\ChangeServiceViewModel.cs" />
+    <Compile Include="ViewModel\Admin\SettingsViewModel.cs" />
     <Compile Include="ViewModel\Doctor\AddScheduleViewModel.cs" />
     <Compile Include="ViewModel\Admin\AdminMainViewModel.cs" />
     <Compile Include="ViewModel\Doctor\ChangeScheduleViewModel.cs" />
@@ -101,6 +110,15 @@
     <Compile Include="ViewModel\Patient\PatientMainPageViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientMainViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientSearchViewModel.cs" />
+    <Compile Include="View\Admin\AddDoctorToServiceWindow.xaml.cs">
+      <DependentUpon>AddDoctorToServiceWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Admin\AdminLogsPage.xaml.cs">
+      <DependentUpon>AdminLogsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Admin\BackupWindow.xaml.cs">
+      <DependentUpon>BackupWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Admin\ChangeDoctorWindow.xaml.cs">
       <DependentUpon>ChangeDoctorWindow.xaml</DependentUpon>
     </Compile>
@@ -112,6 +130,9 @@
     </Compile>
     <Compile Include="View\Admin\ChangeServiceWindow.xaml.cs">
       <DependentUpon>ChangeServiceWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Admin\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Doctor\AddScheduleWindow.xaml.cs">
       <DependentUpon>AddScheduleWindow.xaml</DependentUpon>
@@ -259,6 +280,8 @@
     <Resource Include="Assets\Add.ico" />
     <Resource Include="Assets\Change.ico" />
     <Resource Include="Assets\Delete.ico" />
+    <Resource Include="Assets\Settings.ico" />
+    <Resource Include="Assets\Backup.ico" />
     <Content Include="Model\PrivateDoctorsModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PrivateDoctorsModel.edmx</DependentUpon>
@@ -274,6 +297,18 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\Admin\AddDoctorToServiceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Admin\AdminLogsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Admin\BackupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Admin\ChangeDoctorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -287,6 +322,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Admin\ChangeServiceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Admin\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

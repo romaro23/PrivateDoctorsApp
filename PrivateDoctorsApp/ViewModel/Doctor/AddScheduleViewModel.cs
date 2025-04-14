@@ -7,7 +7,7 @@ using PrivateDoctorsApp.View.Doctor;
 
 namespace PrivateDoctorsApp.ViewModel
 {
-    internal class AddScheduleViewModel : INotifyPropertyChanged
+    internal class AddScheduleViewModel : LogEventBase, INotifyPropertyChanged
     {
         private DateTime? _workDate;
 
@@ -66,6 +66,7 @@ namespace PrivateDoctorsApp.ViewModel
         }
         public AddScheduleViewModel(AddScheduleWindow window)
         {
+            LogEvent += (sender, action, tableName) => CurrentUser.AddLog(action, tableName);
             AddScheduleCommand = new RelayCommand(ExecuteAddSchedule, CanAdd);
             _window = window;
         }
@@ -90,6 +91,7 @@ namespace PrivateDoctorsApp.ViewModel
                         };
                         context.Schedules.Add(newSchedule);
                         context.SaveChanges();
+                        OnLogEvent("Додано графік", "Schedules");
                         DataUpdated?.Invoke();
                     }
                 }

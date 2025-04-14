@@ -1,0 +1,24 @@
+﻿<Window x:Class="PrivateDoctorsApp.View.Admin.BackupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrivateDoctorsApp.View.Admin"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Icon="../../Assets/Backup.ico"
+        Title="Сервіс" SizeToContent="Height" ResizeMode="NoResize" Width="240">
+    <Grid>
+        <StackPanel>
+            <Button Height="30" Margin="10" FontFamily="Segoe UI" FontWeight="Black" Content="Зберегти БД"  BorderThickness="0" Background="#009688" Width="135"  Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5"  Foreground="White" Command="{Binding SaveDatabaseCommand}"/>
+            <Button Height="30" Margin="10" FontFamily="Segoe UI" FontWeight="Black" Content="Відновити БД"  BorderThickness="0" Background="#009688" Width="135"  Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5"  Foreground="White" Command="{Binding RestoreDatabaseCommand}"/>
+            <Button Height="50"  Margin="10" FontFamily="Segoe UI" FontWeight="Black"   BorderThickness="0" Background="#009688" Width="165"  Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5"  Foreground="White" Command="{Binding ChangePeriodDatabaseCommand}">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <TextBlock TextAlignment="Center" Text="Новий обліковий період" TextWrapping="Wrap"/>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

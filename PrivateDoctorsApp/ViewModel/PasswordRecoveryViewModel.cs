@@ -12,7 +12,7 @@ using PrivateDoctorsApp.View;
 namespace PrivateDoctorsApp.ViewModel
 {
 
-    internal class PasswordRecoveryViewModel : INotifyPropertyChanged
+    internal class PasswordRecoveryViewModel : LogEventBase, INotifyPropertyChanged
     {
         private string _email;
         private readonly PasswordRecoveryWindow _window;
@@ -29,6 +29,7 @@ namespace PrivateDoctorsApp.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         public PasswordRecoveryViewModel(PasswordRecoveryWindow window)
         {
+            LogEvent += (sender, action, tableName) => CurrentUser.AddLog(action, tableName);
             RecoveryCommand = new RelayCommand(ExecuteRecovery, CanRecovery);
             _window = window;
         }
@@ -139,6 +140,7 @@ namespace PrivateDoctorsApp.ViewModel
                         {
                             user.Password = newPassword;
                             context.SaveChanges();
+                            OnLogEvent("Оновлено пароль пацієнта", "Users");
                         }
 
                     }

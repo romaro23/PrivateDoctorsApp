@@ -12,7 +12,7 @@ using AdminMainWindow = PrivateDoctorsApp.View.Admin.AdminMainWindow;
 
 namespace PrivateDoctorsApp.ViewModel
 {
-    internal class LoginViewModel : INotifyPropertyChanged
+    internal class LoginViewModel : LogEventBase, INotifyPropertyChanged
     {
         private string _username = "admin";
         private string _password = "admin";
@@ -137,7 +137,7 @@ namespace PrivateDoctorsApp.ViewModel
 
         public LoginViewModel()
         {
-
+            LogEvent += (sender, action, tableName) => CurrentUser.AddLog(action, tableName);
             LoginCommand = new RelayCommand(ExecuteLogin, CanLogin);
             RegCommand = new RelayCommand(ExecuteReg, CanRegister);
             RecoveryCommand = new RelayCommand(ExecuteRecovery);
@@ -188,6 +188,7 @@ namespace PrivateDoctorsApp.ViewModel
                                         main = new DoctorMainWindow();
                                         break;
                                     case "admin":
+                                        CurrentUser.ID = user.ID;
                                         main = new AdminMainWindow();
                                         break;
                                 }
@@ -234,6 +235,12 @@ namespace PrivateDoctorsApp.ViewModel
                             MessageBox.Show("Пацієнт з таким телефоном або електронною поштою вже існує.");
                             return;
                         }
+                        var existingUser = context.Users.FirstOrDefault(u => u.Username == NewUsername);
+                        if (existingUser != null)
+                        {
+                            MessageBox.Show("Пацієнт з логіном вже існує.");
+                            return;
+                        }
                         var newPatient = new Model.Patient
                         {
                             LastName = LastName,
@@ -247,12 +254,6 @@ namespace PrivateDoctorsApp.ViewModel
                         context.Patients.Add(newPatient);
                         context.SaveChanges();
                         var patient = context.Patients.FirstOrDefault(p => p.Email == Email);
-                        var existingUser = context.Users.FirstOrDefault(u => u.Username == NewUsername);
-                        if (existingUser != null)
-                        {
-                            MessageBox.Show("Пацієнт з логіном вже існує.");
-                            return;
-                        }
                         var newUser = new User
                         {
                             PatientID = patient.ID,
@@ -262,6 +263,8 @@ namespace PrivateDoctorsApp.ViewModel
                         };
                         context.Users.Add(newUser);
                         context.SaveChanges();
+                        OnLogEvent("Додано пацієнта", "Patients");
+                        OnLogEvent("Додано акаунт пацієнта", "Users");
                     }
                 }
             }

@@ -1,0 +1,26 @@
+﻿<Window x:Class="PrivateDoctorsApp.View.Admin.AddDoctorToServiceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrivateDoctorsApp.View.Admin"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Додати лікаря" SizeToContent="Height" ResizeMode="NoResize" Width="240">
+    <Grid>
+        <StackPanel>
+            <ComboBox 
+                Width="80" 
+                Margin="5"
+                Padding="5"
+                BorderThickness="2"
+                BorderBrush="Gray"
+                Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                ItemsSource="{Binding IDs}"
+                SelectedItem="{Binding ID}"
+                materialDesign:HintAssist.Hint="Номер">
+            </ComboBox>
+            <Button Margin="10,10"  FontFamily="Segoe UI" FontWeight="Black" Content="Додати лікаря"  BorderThickness="0" Background="#009688" Width="165"  Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5"  Foreground="White" Command="{Binding AddDoctorToServiceCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,129 @@
+﻿<Page x:Class="PrivateDoctorsApp.View.Admin.AdminLogsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PrivateDoctorsApp.View.Admin"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="840"
+      Title="AdminLogsPage">
+
+    <Grid>
+        <Border CornerRadius="20" Background="White" Padding="15">
+            <Border.Effect>
+                <DropShadowEffect Color="#FFB8C0C4" BlurRadius="10" ShadowDepth="3"/>
+            </Border.Effect>
+            <StackPanel>
+                <DataGrid  CanUserResizeRows="False" CanUserResizeColumns="False" Height="400" VerticalAlignment="Top" ItemsSource="{Binding Logs}" AutoGenerateColumns="False"
+CanUserAddRows="False" IsReadOnly="True" HeadersVisibility="Column"
+GridLinesVisibility="None"
+RowBackground="White"
+AlternatingRowBackground="#F7F9FC"
+BorderThickness="0">
+
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="Background" Value="#009688"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Padding" Value="8"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Height" Value="40"/>
+                            <Setter Property="FontSize" Value="14"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Background" Value="White"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#80CBC4"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id користувача" Binding="{Binding UserID}" Width="0.45*" />
+                        <DataGridTextColumn Header="Дія" Binding="{Binding Action}" Width="*" />
+                        <DataGridTextColumn Header="Назва таблиці" Binding="{Binding TableName}" Width="0.6*" />
+                        <DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="0.6*" />
+                        
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel HorizontalAlignment="Center" Margin="20" Orientation="Horizontal">
+                    <ComboBox 
+              Width="120" 
+              Margin="5"
+              Padding="5"
+              BorderThickness="2"
+              BorderBrush="Gray"
+              Style="{StaticResource MaterialDesignOutlinedComboBox}"
+              ItemsSource="{Binding UserIDs}"
+              SelectedItem="{Binding UserID}"
+              materialDesign:HintAssist.Hint="Id користувача">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="SelectionChanged">
+                                <b:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </ComboBox>
+                    <ComboBox 
+              Width="180" 
+              Margin="5"
+              Padding="5"
+              BorderThickness="2"
+              BorderBrush="Gray"
+              Style="{StaticResource MaterialDesignOutlinedComboBox}"
+              ItemsSource="{Binding Actions}"
+              SelectedItem="{Binding Action}"
+              materialDesign:HintAssist.Hint="Дія">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="SelectionChanged">
+                                <b:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </ComboBox>
+                    <ComboBox x:Name="StatusComboBox"
+              Width="180" 
+              Margin="5"
+              Padding="5"
+              BorderThickness="2"
+              BorderBrush="Gray"
+              Style="{StaticResource MaterialDesignOutlinedComboBox}"
+              ItemsSource="{Binding TableNames}"
+              SelectedItem="{Binding TableName}"
+              materialDesign:HintAssist.Hint="Назва таблиці">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="SelectionChanged">
+                                <b:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </ComboBox>
+                    <DatePicker Height="30" Margin="25" Width="130" x:Name="DatePicker" SelectedDate="{Binding Date, Mode=TwoWay}"
+                                BorderThickness="2"
+                                BorderBrush="Gray" materialDesign:TextFieldAssist.TextFieldCornerRadius="5"  
+                                Padding="5" 
+                                materialDesign:HintAssist.Hint="Дата"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                Style="{StaticResource MaterialDesignOutlinedDatePicker}">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="SelectedDateChanged">
+                                <b:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </DatePicker>
+                </StackPanel>
+                <Button  FontFamily="Segoe UI" FontWeight="Black" Content="Очистити"  BorderThickness="0" Background="#009688" Width="120" Height="30" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5"  Foreground="White" Command="{Binding ClearCommand}"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

@@ -35,5 +35,6 @@ namespace PrivateDoctorsApp.Model
         public virtual DbSet<Schedule> Schedules { get; set; }
         public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Log> Logs { get; set; }
     }
 }

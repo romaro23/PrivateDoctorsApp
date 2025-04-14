@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace PrivateDoctorsApp.ViewModel.Doctor
 {
-    internal class ChangeScheduleViewModel: INotifyPropertyChanged
+    internal class ChangeScheduleViewModel: LogEventBase, INotifyPropertyChanged
     {
         private readonly ChangeScheduleWindow _window;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -82,6 +82,7 @@ namespace PrivateDoctorsApp.ViewModel.Doctor
 
         public ChangeScheduleViewModel(ChangeScheduleWindow window)
         {
+            LogEvent += (sender, action, tableName) => CurrentUser.AddLog(action, tableName);
             ChangeScheduleCommand = new RelayCommand(ExecuteChangeSchedule, CanChange);
             _window = window;
             LoadSchedules();
@@ -106,6 +107,7 @@ namespace PrivateDoctorsApp.ViewModel.Doctor
                             scheduleToUpdate.AppointmentStart = AppointmentStart;
                             scheduleToUpdate.AppointmentEnd = AppointmentEnd;
                             context.SaveChanges();
+                            OnLogEvent("Оновлено графік", "Schedules");
                             DataUpdated?.Invoke();
                         }
                     }

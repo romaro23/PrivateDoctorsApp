@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace PrivateDoctorsApp.ViewModel
 {
-    internal class DeleteScheduleViewModel : INotifyPropertyChanged
+    internal class DeleteScheduleViewModel : LogEventBase, INotifyPropertyChanged
 
     {
         private readonly DeleteScheduleWindow _window;
@@ -70,6 +70,7 @@ namespace PrivateDoctorsApp.ViewModel
         }
         public DeleteScheduleViewModel(DeleteScheduleWindow window)
         {
+            LogEvent += (sender, action, tableName) => CurrentUser.AddLog(action, tableName);
             DeleteScheduleCommand = new RelayCommand(ExecuteDeleteSchedule, CanDelete);
             _window = window;
             LoadSchedules();
@@ -94,6 +95,7 @@ namespace PrivateDoctorsApp.ViewModel
                         {
                             context.Schedules.Remove(scheduleToDelete);
                             context.SaveChanges();
+                            OnLogEvent("Видалено графік", "Schedules");
                             DataUpdated?.Invoke();
                         }
                     }

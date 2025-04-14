@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Net;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using PrivateDoctorsApp.Model;
 using PrivateDoctorsApp.View.Admin;
-using PrivateDoctorsApp.ViewModel.Patient;
 
 namespace PrivateDoctorsApp.ViewModel.Admin
 {
-    internal class ChangeServiceViewModel : INotifyPropertyChanged
+    internal class ChangeServiceViewModel : LogEventBase, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
@@ -118,6 +111,7 @@ namespace PrivateDoctorsApp.ViewModel.Admin
         }
         public ChangeServiceViewModel(ChangeServiceWindow window, AdminServicesViewModel.ServiceItem service = null)
         {
+            LogEvent += (sender, action, tableName) => CurrentUser.AddLog(action, tableName);
             _window = window;
             _service = service;
             ChangeServiceCommand = new RelayCommand(ExecuteChange, CanChange);
@@ -157,6 +151,7 @@ namespace PrivateDoctorsApp.ViewModel.Admin
                                 };
                                 context.Services.Add(newService);
                                 context.SaveChanges();
+                                OnLogEvent("Додано послугу", "Services");
                                 DataUpdated?.Invoke();
                             }
                         }
@@ -182,6 +177,7 @@ namespace PrivateDoctorsApp.ViewModel.Admin
                                     service.DurationMinutes = int.Parse(Duration);
                                     service.Price = decimal.Parse(Price);
                                     context.SaveChanges();
+                                    OnLogEvent("Оновлено послугу", "Services");
                                     DataUpdated?.Invoke();
                                 }
                             }
@@ -206,6 +202,7 @@ namespace PrivateDoctorsApp.ViewModel.Admin
                                 {
                                     context.Services.Remove(service);
                                     context.SaveChanges();
+                                    OnLogEvent("Видалено послугу", "Services");
                                     DataUpdated?.Invoke();
                                 }
                             }

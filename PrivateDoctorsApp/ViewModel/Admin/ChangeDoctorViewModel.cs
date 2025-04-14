@@ -1,21 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using PrivateDoctorsApp.Model;
 using PrivateDoctorsApp.View.Admin;
-using PrivateDoctorsApp.View.Doctor;
 
 namespace PrivateDoctorsApp.ViewModel.Admin
 {
-    internal class ChangeDoctorViewModel : INotifyPropertyChanged
+    internal class ChangeDoctorViewModel : LogEventBase, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -227,6 +222,7 @@ namespace PrivateDoctorsApp.ViewModel.Admin
         private AdminDoctorsViewModel.PersonalData _doctor;
         public ChangeDoctorViewModel(ChangeDoctorWindow window, AdminDoctorsViewModel.PersonalData doctor = null)
         {
+            LogEvent += (sender,action, tableName) => CurrentUser.AddLog(action, tableName);
             _doctor = doctor;
             _window = window;
             ChangeDoctorCommand = new RelayCommand(ExecuteChange, CanChange);
@@ -299,6 +295,9 @@ namespace PrivateDoctorsApp.ViewModel.Admin
                                 };
                                 context.Users.Add(newUser);
                                 context.SaveChanges();
+                                OnLogEvent("Додано особисту інформацію лікаря", "Employee");
+                                OnLogEvent("Додано професійну інформацію лікаря", "Professional");
+                                OnLogEvent("Додано дані акаунта лікаря", "Users");
                                 DataUpdated?.Invoke();
                             }
                         }
@@ -343,6 +342,9 @@ namespace PrivateDoctorsApp.ViewModel.Admin
                                         user.Password = Password;
                                     }
                                     context.SaveChanges();
+                                    OnLogEvent("Оновлено особисту інформацію лікаря", "Employee");
+                                    OnLogEvent("Оновлено професійну інформацію лікаря", "Professional");
+                                    OnLogEvent("Оновлено дані акаунта лікаря", "Users");
                                     DataUpdated?.Invoke();
                                 }
                             }
@@ -365,6 +367,9 @@ namespace PrivateDoctorsApp.ViewModel.Admin
                                 var employee = context.Employees.FirstOrDefault(e => e.ID == _id);
                                 if (employee != null)
                                 {
+                                    var doctorServices = context.DoctorServices.Where(ds => ds.DoctorID == _id).ToList();
+                                    context.DoctorServices.RemoveRange(doctorServices);
+
                                     var professional = context.Professionals.FirstOrDefault(p => p.EmployeeID == _id);
                                     if (professional != null)
                                         context.Professionals.Remove(professional);
@@ -375,6 +380,9 @@ namespace PrivateDoctorsApp.ViewModel.Admin
 
                                     context.Employees.Remove(employee);
                                     context.SaveChanges();
+                                    OnLogEvent("Видалено особисту інформацію лікаря", "Employee");
+                                    OnLogEvent("Видалено професійну інформацію лікаря", "Professional");
+                                    OnLogEvent("Видалено дані акаунта лікаря", "Users");
                                     DataUpdated?.Invoke();
                                 }
                             }
