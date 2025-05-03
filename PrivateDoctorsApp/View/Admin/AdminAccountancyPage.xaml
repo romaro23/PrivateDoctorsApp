@@ -69,7 +69,7 @@ BorderThickness="0">
                                 <DataGridTextColumn Header="Загальна кількість" Binding="{Binding TotalAppointments}" Width="*" />
                                 <DataGridTextColumn Header="Завершених" Binding="{Binding Confirmed}" Width="*" />
                                 <DataGridTextColumn Header="Запланованих" Binding="{Binding Pending}" Width="*" />
-                                <DataGridTextColumn Header="Скасованих" Binding="{Binding Cancelled}" Width="*" />
+
                             </DataGrid.Columns>
                         </DataGrid>
                     </TabItem>

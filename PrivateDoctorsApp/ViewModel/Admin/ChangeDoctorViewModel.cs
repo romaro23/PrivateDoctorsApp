@@ -117,80 +117,110 @@ namespace PrivateDoctorsApp.ViewModel.Admin
             get => _address;
             set { _address = value; OnPropertyChanged(nameof(Address)); }
         }
+        private bool IsValidLastName() =>
+            !string.IsNullOrWhiteSpace(LastName);
 
+        private bool IsValidFirstName() =>
+            !string.IsNullOrWhiteSpace(FirstName);
+
+        private bool IsValidMiddleName() =>
+            !string.IsNullOrWhiteSpace(MiddleName);
+
+        private bool IsValidEmail() =>
+            !string.IsNullOrWhiteSpace(Email) &&
+            Regex.IsMatch(Email, @"^[\w\.-]+@[\w\.-]+\.\w+$");
+
+        private bool IsValidPhone() =>
+            !string.IsNullOrWhiteSpace(Phone) &&
+            Regex.IsMatch(Phone, @"^\+?\d{10,15}$");
+
+        private bool IsValidAddress() =>
+            !string.IsNullOrWhiteSpace(Address);
+
+        private bool IsValidSpecialization() =>
+            !string.IsNullOrWhiteSpace(Specialization);
+
+        private bool IsValidExperienceYears() =>
+            !string.IsNullOrWhiteSpace(ExperienceYears) &&
+            Regex.IsMatch(ExperienceYears, @"^\d+$");
+
+        private bool IsValidEducation() =>
+            !string.IsNullOrWhiteSpace(Education);
+
+        private bool IsValidRating() =>
+            !string.IsNullOrWhiteSpace(Rating) &&
+            decimal.TryParse(Rating, NumberStyles.Number, CultureInfo.InvariantCulture, out _);
+
+        private bool IsValidUsername() =>
+            !string.IsNullOrWhiteSpace(Username);
+
+        private bool IsValidPassword() =>
+            !string.IsNullOrWhiteSpace(Password);
         public ICommand ValidateLastNameCommand => new RelayCommand(_ =>
         {
-            if (string.IsNullOrWhiteSpace(LastName))
+            if (!IsValidLastName())
                 ShowWarning("Прізвище не може бути порожнім.");
         });
         public ICommand ValidateFirstNameCommand => new RelayCommand(_ =>
         {
-            if (string.IsNullOrWhiteSpace(FirstName))
+            if (!IsValidFirstName())
                 ShowWarning("Ім'я не може бути порожнім.");
         });
         public ICommand ValidateMiddleNameCommand => new RelayCommand(_ =>
         {
-            if (string.IsNullOrWhiteSpace(MiddleName))
+            if (!IsValidMiddleName())
                 ShowWarning("По-батькові не може бути порожнім.");
         });
         public ICommand ValidateEmailCommand => new RelayCommand(_ =>
         {
-            if (!Regex.IsMatch(Email ?? "", @"^[\w\.-]+@[\w\.-]+\.\w+$"))
+            if (!IsValidEmail())
                 ShowWarning("Невірний формат Email.");
         });
 
         public ICommand ValidatePhoneCommand => new RelayCommand(_ =>
         {
-            if (!Regex.IsMatch(Phone ?? "", @"^\+?\d{10,15}$"))
+            if (!IsValidPhone())
                 ShowWarning("Невірний формат номера телефону.");
         });
 
         public ICommand ValidateAddressCommand => new RelayCommand(_ =>
         {
-            if (string.IsNullOrWhiteSpace(Address))
+            if (!IsValidAddress())
                 ShowWarning("Адреса не може бути порожньою.");
         });
 
         public ICommand ValidateSpecializationCommand => new RelayCommand(_ =>
         {
-            if (string.IsNullOrWhiteSpace(Specialization))
+            if (!IsValidSpecialization())
                 ShowWarning("Спеціалізація не може бути порожньою.");
         });
         public ICommand ValidateExperienceYearsCommand => new RelayCommand(_ =>
         {
-            if (string.IsNullOrWhiteSpace(ExperienceYears))
+            if (!IsValidExperienceYears())
             {
-                ShowWarning("Досвід не може бути порожнім.");
-            }
-            else if (!Regex.IsMatch(ExperienceYears, @"^\d+$"))
-            {
-                ShowWarning("Досвід повинен містити лише цифри.");
+                ShowWarning("Досвід не може бути порожнім і повинен містити лише цифри.");
             }
         });
         public ICommand ValidateEducationCommand => new RelayCommand(_ =>
         {
-            if (string.IsNullOrWhiteSpace(Education))
+            if (!IsValidEducation())
                 ShowWarning("Освіта не може бути порожньою.");
         });
         public ICommand ValidateRatingCommand => new RelayCommand(_ =>
         {
-            if (string.IsNullOrWhiteSpace(Rating))
+            if (!IsValidRating())
             {
-                ShowWarning("Рейтинг не може бути порожнім.");
-            }
-            else if (!decimal.TryParse(Rating, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal e))
-            {
-                ShowWarning("Рейтинг повинен бути числом з десятковою крапкою (наприклад: 4.5).");
+                ShowWarning("Рейтинг не може бути порожнім і повинен бути числом з десятковою крапкою (наприклад: 4.5).");
             }
         });
         public ICommand ValidateUsernameCommand => new RelayCommand(_ =>
         {
-            if (string.IsNullOrWhiteSpace(Username))
+            if (!IsValidUsername())
                 ShowWarning("Логін не може бути порожнім.");
         });
         public ICommand ValidatePasswordCommand => new RelayCommand(_ =>
         {
-            if (string.IsNullOrWhiteSpace(Password))
+            if (!IsValidPassword())
                 ShowWarning("Пароль не може бути порожнім.");
         });
         private void ShowWarning(string message)
@@ -205,18 +235,18 @@ namespace PrivateDoctorsApp.ViewModel.Admin
         public ICommand ChangeDoctorCommand { get; }
         private bool CanChange()
         {
-            return !string.IsNullOrWhiteSpace(FirstName) &&
-                   !string.IsNullOrWhiteSpace(LastName) &&
-                   !string.IsNullOrWhiteSpace(Email) &&
-                   !string.IsNullOrWhiteSpace(MiddleName) &&
-                   !string.IsNullOrWhiteSpace(Phone) &&
-                   !string.IsNullOrWhiteSpace(Specialization) &&
-                   !string.IsNullOrWhiteSpace(Education) &&
-                   !string.IsNullOrWhiteSpace(ExperienceYears) &&
-                   !string.IsNullOrWhiteSpace(Address) &&
-                   !string.IsNullOrWhiteSpace(Rating) &&
-                   !string.IsNullOrWhiteSpace(Username) &&
-                   !string.IsNullOrWhiteSpace(Password);
+            return IsValidFirstName() &&
+                   IsValidLastName() &&
+                   IsValidEmail() &&
+                   IsValidMiddleName() &&
+                   IsValidPhone() &&
+                   IsValidSpecialization() &&
+                   IsValidEducation() &&
+                   IsValidExperienceYears() &&
+                   IsValidAddress() &&
+                   IsValidRating() &&
+                   IsValidUsername() &&
+                   IsValidPassword();
         }
 
         private AdminDoctorsViewModel.PersonalData _doctor;
@@ -274,7 +304,7 @@ namespace PrivateDoctorsApp.ViewModel.Admin
                                 };
                                 context.Employees.Add(newEmployee);
                                 context.SaveChanges();
-                                var id = context.Employees.FirstOrDefault(e => e.Email == Email).ID;
+                                var id = newEmployee.ID;
                                 var experienceYears = int.Parse(ExperienceYears);
                                 var rating = decimal.Parse(Rating);
                                 var newProfessional = new Model.Professional
@@ -291,7 +321,8 @@ namespace PrivateDoctorsApp.ViewModel.Admin
                                 {
                                     DoctorID = id,
                                     Username = Username,
-                                    Password = Password
+                                    Password = Password,
+                                    Role = "doctor"
                                 };
                                 context.Users.Add(newUser);
                                 context.SaveChanges();

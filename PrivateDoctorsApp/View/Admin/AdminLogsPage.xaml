@@ -59,7 +59,7 @@ BorderThickness="0">
                         
                     </DataGrid.Columns>
                 </DataGrid>
-                <StackPanel HorizontalAlignment="Center" Margin="20" Orientation="Horizontal">
+                <StackPanel HorizontalAlignment="Center" Margin="0" Orientation="Horizontal">
                     <ComboBox 
               Width="120" 
               Margin="5"

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrivateDoctorsApp.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Icon="../Assets/Login.ico"
         Title="Сторінка входу" Height="700" Width="1100" Background="#FFD8DEE1" ResizeMode="NoResize">
@@ -31,10 +32,22 @@
                              Width="200" Style="{StaticResource MaterialDesignTextBox}"
                              materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
                              materialDesign:HintAssist.Hint="Логін"
-                    />
+                    >
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="LostFocus">
+                                <b:InvokeCommandAction Command="{Binding ValidateUsernameCommand}" />
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </TextBox>
                     <PasswordBox materialDesign:PasswordBoxAssist.Password="{Binding Password, Mode=TwoWay}"
               Grid.Row="2" BorderThickness="2" Padding="5"  Width="200" Margin="5" Style="{StaticResource MaterialDesignPasswordBox}" materialDesign:TextFieldAssist.TextFieldCornerRadius="5"  materialDesign:HintAssist.Hint="Пароль"
-                    />
+                    >
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="LostFocus">
+                                <b:InvokeCommandAction Command="{Binding ValidatePasswordCommand}" />
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </PasswordBox>
                     <Button  FontFamily="Segoe UI" FontWeight="Black" Content="Увійти" Margin="5" BorderThickness="0" Background="#009688" Width="200" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5" Grid.Row="3" Foreground="White" Command="{Binding LoginCommand}"/>
                     <Button FontSize="10" HorizontalAlignment="Right" Height="20" FontFamily="Segoe UI" FontWeight="Black" Content="Відновити пароль" BorderThickness="0" Background="Transparent" Foreground="#009688" Width="110" Padding="0" Grid.Row="4" Style="{StaticResource MaterialDesignFlatLightButton}" Command="{Binding RecoveryCommand}"/>
                 </Grid>
@@ -56,37 +69,77 @@
                              Width="200" Style="{StaticResource MaterialDesignTextBox}"
                              materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
                              materialDesign:HintAssist.Hint="Прізвище"
-                    />
+                    >
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="LostFocus">
+                                <b:InvokeCommandAction Command="{Binding ValidateLastNameCommand}" />
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </TextBox>
                     <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" BorderThickness="2" Margin="3" HorizontalAlignment="Center" Padding="5"
                              Width="200" Style="{StaticResource MaterialDesignTextBox}"
                              materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
                              materialDesign:HintAssist.Hint="Ім'я"
-                    />
+                    >
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="LostFocus">
+                                <b:InvokeCommandAction Command="{Binding ValidateFirstNameCommand}" />
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </TextBox>
                     <TextBox Text="{Binding MiddleName, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" BorderThickness="2" Margin="5" HorizontalAlignment="Center" Padding="5"
                              Width="200" Style="{StaticResource MaterialDesignTextBox}"
                              materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
                              materialDesign:HintAssist.Hint="По-батькові"
-                    />
-                    
+                    >
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="LostFocus">
+                                <b:InvokeCommandAction Command="{Binding ValidateMiddleNameCommand}" />
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </TextBox>
+
                     <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" BorderThickness="2" Margin="3" HorizontalAlignment="Center" Padding="5"
                              Width="200" Style="{StaticResource MaterialDesignTextBox}"
                              materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
                              materialDesign:HintAssist.Hint="Email"
-                    />
+                    >
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="LostFocus">
+                                <b:InvokeCommandAction Command="{Binding ValidateEmailCommand}" />
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </TextBox>
                     <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" BorderThickness="2" Margin="3" HorizontalAlignment="Center" Padding="5"
                              Width="200" Style="{StaticResource MaterialDesignTextBox}"
                              materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
                              materialDesign:HintAssist.Hint="Телефон"
-                    />
+                    >
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="LostFocus">
+                                <b:InvokeCommandAction Command="{Binding ValidatePhoneCommand}" />
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </TextBox>
                     <TextBox Text="{Binding NewUsername, UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" BorderThickness="2" Margin="3" HorizontalAlignment="Center" Padding="5"
                              Width="200" Style="{StaticResource MaterialDesignTextBox}"
                              materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
                              materialDesign:HintAssist.Hint="Логін"
                     >
-                        
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="LostFocus">
+                                <b:InvokeCommandAction Command="{Binding ValidateNewUsernameCommand}" />
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
                     </TextBox>
                     <PasswordBox materialDesign:PasswordBoxAssist.Password="{Binding NewPassword, Mode=TwoWay}" Grid.Row="7" BorderThickness="2" Padding="5"  Width="200" Margin="5" Style="{StaticResource MaterialDesignPasswordBox}" materialDesign:TextFieldAssist.TextFieldCornerRadius="5"  materialDesign:HintAssist.Hint="Пароль"
-                    />
+                    >
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="LostFocus">
+                                <b:InvokeCommandAction Command="{Binding ValidateNewPasswordCommand}" />
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </PasswordBox>
                     <DatePicker SelectedDate="{Binding DateOfBirth, Mode=TwoWay}" Grid.Row="8"
                                 Width="200"
                                 BorderBrush="Gray"
@@ -94,7 +147,13 @@
                                 Padding="5" Margin="5"
                                 materialDesign:HintAssist.Hint="Дата народження"
                                 materialDesign:TextFieldAssist.HasClearButton="True"
-                                Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                                Style="{StaticResource MaterialDesignOutlinedDatePicker}">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="SelectedDateChanged">
+                                <b:InvokeCommandAction Command="{Binding ValidateDateOfBirthCommand}" />
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </DatePicker>
                     <Button FontFamily="Segoe UI" FontWeight="Black" Content="Зареєструватися" Margin="5" BorderThickness="0" Background="#009688" Width="200" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5" Grid.Row="9" Foreground="White"  Command="{Binding RegCommand}"/>
                     
                 </Grid>

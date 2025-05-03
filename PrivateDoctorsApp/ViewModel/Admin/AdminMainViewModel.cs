@@ -40,21 +40,6 @@ namespace PrivateDoctorsApp.ViewModel
             string page = parameter as string;
             if (page != null)
             {
-                if (page == "Main")
-                {
-                    _frame.Navigate(new AdminMainPage());
-                }
-
-                if (page == "Appointments")
-                {
-                    _frame.Navigate(new AdminAppointmentsPage());
-                }
-
-                if (page == "Schedules")
-                {
-                    _frame.Navigate(new AdminSchedulesPage());
-                }
-
                 if (page == "Accountancy")
                 {
                     _frame.Navigate(new AdminAccountancyPage());

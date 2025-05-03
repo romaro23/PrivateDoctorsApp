@@ -69,7 +69,7 @@ namespace PrivateDoctorsApp.ViewModel.Doctor
                                 })
                             .ToList()
                         );
-                        Patients = new ObservableCollection<string>(Notifications.Select(n => n.PatientName).ToList());
+                        Patients = new ObservableCollection<string>(Notifications.Select(n => n.PatientName).Distinct().ToList());
                         OnPropertyChanged(nameof(Notifications));
                     }
                 }

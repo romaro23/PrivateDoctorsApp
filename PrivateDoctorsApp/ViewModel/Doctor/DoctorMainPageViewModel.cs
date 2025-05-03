@@ -220,7 +220,7 @@ namespace PrivateDoctorsApp.ViewModel.Doctor
                             (from n in context.Notifications
                                 join p in context.Patients on n.PatientID equals p.ID
                                 where n.DoctorID == CurrentUser.ID && (n.Type == "appointment" || n.Type == "cancellation")
-                                orderby n.DateOfCreation
+                                orderby n.DateOfCreation descending 
                                 select new Notification
                                 {
                                     Date = n.DateOfCreation,

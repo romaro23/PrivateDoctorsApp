@@ -187,7 +187,7 @@ namespace PrivateDoctorsApp.ViewModel.Doctor
                         return a;
                     })
                 );
-                Patients = new ObservableCollection<string>(Appointments.Select(n => n.PatientName).ToList());
+                Patients = new ObservableCollection<string>(Appointments.Select(n => n.PatientName).Distinct().ToList());
                 Services = new ObservableCollection<string>(Appointments.Select(n => n.ServiceName).Distinct().ToList());
                 Statuses = new ObservableCollection<string>(Appointments.Select(n => n.Status).Distinct().ToList());
                 Dates = new ObservableCollection<DateTime?>(Appointments.Select(n => n.Date).Distinct().ToList());

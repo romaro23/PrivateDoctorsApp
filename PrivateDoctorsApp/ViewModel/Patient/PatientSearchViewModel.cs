@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using PrivateDoctorsApp.Model;
+using PrivateDoctorsApp.View.Patient;
 
 namespace PrivateDoctorsApp.ViewModel.Patient
 {
@@ -17,6 +18,7 @@ namespace PrivateDoctorsApp.ViewModel.Patient
         }
         public class DoctorItem
         {
+            public int? ID { get; set; }
             public string DoctorName { get; set; }
             public string Specialization { get; set; }
             public string Address { get; set; }
@@ -35,6 +37,7 @@ namespace PrivateDoctorsApp.ViewModel.Patient
 
         public class ServiceItem
         {
+            public int? ID { get; set; }
             public string ServiceName { get; set; }
             public decimal? Price { get; set; }
             public int? Duration { get; set; }
@@ -141,6 +144,9 @@ namespace PrivateDoctorsApp.ViewModel.Patient
         public ICommand SelectedItemChangedCommand { get; }
         public ICommand SortCommand { get; }
         public ICommand PriceCommand { get; }
+        public ICommand ViewServicesCommand { get; }
+        public ICommand ViewDoctorsCommand { get; }
+        public event Action DataUpdated;
         public PatientSearchViewModel()
         {
             LoadDoctors();
@@ -153,13 +159,36 @@ namespace PrivateDoctorsApp.ViewModel.Patient
                 LoadDoctors(Specialization, Address, SortByRating);
             });
             PriceCommand = new RelayCommand(ExecuteFilterPrice);
+            ViewServicesCommand = new RelayCommand(ExecuteViewServices);
+            ViewDoctorsCommand = new RelayCommand(ExecuteViewDoctors);
         }
 
+        private void ExecuteViewDoctors(object parameter)
+        {
+            var doctor = parameter as DoctorItem;
+            PatientViewDoctorsWindow window = new PatientViewDoctorsWindow();
+            var model = new PatientViewDoctorsViewModel(doctor, window);
+            window.DataContext = model;
+            model.DataUpdated += () => DataUpdated?.Invoke();
+            window.Title = doctor.DoctorName;
+            window.Show();
+        }
+        private void ExecuteViewServices(object parameter)
+        {
+            var service = parameter as ServiceItem;
+            PatientViewServicesWindow window = new PatientViewServicesWindow();
+            var model = new PatientViewServicesViewModel(service, window);
+            window.DataContext = model;
+            model.DataUpdated += () => DataUpdated?.Invoke();
+            window.Title = service.ServiceName;
+            window.Show();
+        }
         private void ExecuteFilterPrice(object parameter)
         {
             decimal? price = (Price < MinPrice) ? (decimal?)null : Price;
             LoadServices(price);
         }
+
         private void ExecuteSelectedItemChanged(object parameter)
         {
             LoadDoctors(Specialization, Address, SortByRating);
@@ -186,6 +215,7 @@ namespace PrivateDoctorsApp.ViewModel.Patient
                                 where !price.HasValue || s.Price <= price
                                 select new ServiceItem
                                 {
+                                    ID = s.ID,
                                     ServiceName = s.ServiceName,
                                     Price = s.Price,
                                     Duration = s.DurationMinutes
@@ -222,6 +252,7 @@ namespace PrivateDoctorsApp.ViewModel.Patient
                                 where (string.IsNullOrEmpty(specialization) || p.Specialization == specialization) && (string.IsNullOrEmpty(address) || e.Address.Contains(address))
                                 select new DoctorItem
                                 {
+                                    ID = e.ID,
                                     DoctorName = e.LastName + " " + e.FirstName + " " + e.MiddleName,
                                     Address = e.Address,
                                     Rating = p.Rating,

@@ -32,9 +32,14 @@ namespace PrivateDoctorsApp.ViewModel.Doctor
             get => _appointmentStart;
             set
             {
-                if (_appointmentStart != value)
+                if (_appointmentStart != value && value.Value.TimeOfDay >= TimeSpan.FromHours(8) && value.Value.TimeOfDay <= TimeSpan.FromHours(20))
                 {
                     _appointmentStart = value;
+                    OnPropertyChanged(nameof(AppointmentStart));
+                }
+                else
+                {
+                    _appointmentStart = value.Value.Date.AddHours(8);
                     OnPropertyChanged(nameof(AppointmentStart));
                 }
             }
@@ -46,9 +51,14 @@ namespace PrivateDoctorsApp.ViewModel.Doctor
             get => _appointmentEnd;
             set
             {
-                if (_appointmentEnd != value)
+                if (_appointmentEnd != value && value.Value.TimeOfDay >= TimeSpan.FromHours(8) && value.Value.TimeOfDay <= TimeSpan.FromHours(20))
                 {
                     _appointmentEnd = value;
+                    OnPropertyChanged(nameof(AppointmentEnd));
+                }
+                else
+                {
+                    _appointmentEnd= value.Value.Date.AddHours(20);
                     OnPropertyChanged(nameof(AppointmentEnd));
                 }
             }
@@ -131,8 +141,8 @@ namespace PrivateDoctorsApp.ViewModel.Doctor
                     {
                         ScheduleDates = new ObservableCollection<DateTime?>(
                             (from s in context.Schedules
-                                where s.DoctorID == CurrentUser.ID
-                                orderby s.WorkDate
+                                where s.DoctorID == CurrentUser.ID && s.PatientID == null
+                             orderby s.WorkDate
                                 select s.WorkDate)
                             .ToList());
                     }

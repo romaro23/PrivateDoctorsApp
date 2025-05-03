@@ -100,7 +100,8 @@
                             <DataGridTemplateColumn Header="" Width="*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Height="30" FontFamily="Segoe UI" FontWeight="Black" Content="Переглянути"  BorderThickness="0" Background="#009688" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5"  Foreground="White" Command="{Binding ClearCommand}"/>
+                                        <Button Height="30" FontFamily="Segoe UI" FontWeight="Black" Content="Переглянути"  BorderThickness="0" Background="#009688" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5"  Foreground="White" Command="{Binding DataContext.ViewDoctorsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                CommandParameter="{Binding}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -174,7 +175,8 @@
                             <DataGridTemplateColumn Header="" Width="*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Height="30" FontFamily="Segoe UI" FontWeight="Black" Content="Переглянути"  BorderThickness="0" Background="#009688" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5"  Foreground="White" Command="{Binding ClearCommand}"/>
+                                        <Button Height="30" FontFamily="Segoe UI" FontWeight="Black" Content="Переглянути"  BorderThickness="0" Background="#009688" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5"  Foreground="White" Command="{Binding DataContext.ViewServicesCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                    CommandParameter="{Binding}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

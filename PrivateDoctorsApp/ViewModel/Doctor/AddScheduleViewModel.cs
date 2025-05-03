@@ -29,9 +29,14 @@ namespace PrivateDoctorsApp.ViewModel
             get => _appointmentStart;
             set
             {
-                if (_appointmentStart != value)
+                if (_appointmentStart != value && value.Value.TimeOfDay >= TimeSpan.FromHours(8) && value.Value.TimeOfDay <= TimeSpan.FromHours(20))
                 {
                     _appointmentStart = value;
+                    OnPropertyChanged(nameof(AppointmentStart));
+                }
+                else
+                {
+                    _appointmentStart = value.Value.Date.AddHours(8);
                     OnPropertyChanged(nameof(AppointmentStart));
                 }
             }
@@ -45,9 +50,14 @@ namespace PrivateDoctorsApp.ViewModel
             get => _appointmentEnd;
             set
             {
-                if (_appointmentEnd != value)
+                if (_appointmentEnd != value && value.Value.TimeOfDay >= TimeSpan.FromHours(8) && value.Value.TimeOfDay <= TimeSpan.FromHours(20))
                 {
                     _appointmentEnd = value;
+                    OnPropertyChanged(nameof(AppointmentEnd));
+                }
+                else
+                {
+                    _appointmentEnd = value.Value.Date.AddHours(20);
                     OnPropertyChanged(nameof(AppointmentEnd));
                 }
             }

@@ -10,11 +10,10 @@ namespace PrivateDoctorsApp.Model
         public static Dictionary<string, string> Status = new Dictionary<string, string>
         {
             { "pending", "Заплановано"},
-            { "cancelled", "Скасовано"},
             { "confirmed", "Завершено"}
 
         };
-
+        public static decimal Balance { get; set; }
         public static string Path { get; set; } = "";
         public static DateTime? PeriodStart { get; set; }
         public static DateTime? PeriodEnd{ get; set; }

@@ -170,7 +170,7 @@
                         </TextBlock.RenderTransform>
                     </TextBlock>
 
-                <ItemsControl Margin="0,0,0,10" HorizontalAlignment="Center" ItemsSource="{Binding Notifications}">
+                <ItemsControl Margin="0,0,0,10" HorizontalAlignment="Center" ItemsSource="{Binding Notifications}" FlowDirection="RightToLeft">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel Orientation="Horizontal" />
@@ -179,7 +179,7 @@
 
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderThickness="0" CornerRadius="15" Padding="10" Margin="5,20,5,5" Width="230">
+                                <Border BorderThickness="0" CornerRadius="15" Padding="10" Margin="5,20,5,5" Width="230" FlowDirection="LeftToRight">
                                     <Border.Background>
                                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                                         <GradientStop Color="#33B2A3" Offset="0"/>

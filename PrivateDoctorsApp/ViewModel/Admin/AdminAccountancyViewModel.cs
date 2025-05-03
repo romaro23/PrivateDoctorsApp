@@ -88,30 +88,29 @@ namespace PrivateDoctorsApp.ViewModel.Admin
         {
             var tab = _tabControl.SelectedItem as TabItem;
             var activeTab = tab.Header as string;
-            var projectDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var rootDirectory = Directory.GetParent(projectDirectory).FullName;
-            var assetsDirectory = Directory.GetParent(rootDirectory).FullName;
+            var exportPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "PrivateDoctorsApp");
+            Directory.CreateDirectory(exportPath);
             string filePath = "";
             switch (activeTab)
             {
                 case "Кількість бронювань за період":
-                    filePath = Path.Combine(assetsDirectory, "Assets", "Appointments.csv");
+                    filePath = Path.Combine(exportPath, "Appointments.csv");
                     GenerateCSV(Appointments, filePath);
                     break;
                 case "Бронювання по спеціалізаціях":
-                    filePath = Path.Combine(assetsDirectory, "Assets", "AppointmentsBySpecialization.csv");
+                    filePath = Path.Combine(exportPath, "AppointmentsBySpecialization.csv");
                     GenerateCSV(AppointmentsBySpecialization, filePath);
                     break;
                 case "Прибуток по спеціалізаціях":
-                    filePath = Path.Combine(assetsDirectory, "Assets", "IncomeBySpecialization.csv");
+                    filePath = Path.Combine(exportPath, "IncomeBySpecialization.csv");
                     GenerateCSV(IncomeBySpecialization, filePath);
                     break;
                 case "Кількість бронювань по лікарях":
-                    filePath = Path.Combine(assetsDirectory, "Assets", "AppointmentsByDoctor.csv");
+                    filePath = Path.Combine(exportPath, "AppointmentsByDoctor.csv");
                     GenerateCSV(AppointmentsByDoctor, filePath);
                     break;
                 case "Прибуток за період":
-                    filePath = Path.Combine(assetsDirectory, "Assets", "TotalIncome.csv");
+                    filePath = Path.Combine(exportPath, "TotalIncome.csv");
                     GenerateCSV(TotalIncome, filePath);
                     break;
             }
@@ -278,7 +277,6 @@ namespace PrivateDoctorsApp.ViewModel.Admin
                         var totalAppointments = appointments.Count;
                         var confirmedCount = appointments.Count(a => a.Status == "confirmed");
                         var pendingCount = appointments.Count(a => a.Status == "pending");
-                        var cancelledCount = appointments.Count(a => a.Status == "cancelled");
                         Appointments = new ObservableCollection<object>
                         {
                             new
@@ -286,7 +284,6 @@ namespace PrivateDoctorsApp.ViewModel.Admin
                                 TotalAppointments = totalAppointments,
                                 Confirmed = confirmedCount,
                                 Pending = pendingCount,
-                                Cancelled = cancelledCount
                             }
                         };
                     }

@@ -40,6 +40,7 @@
                             materialDesign:TextFieldAssist.HasClearButton="True"
                             Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
             </StackPanel>
+            <Button Height="30" Margin="10" FontFamily="Segoe UI" FontWeight="Black" Content="Тестування"  BorderThickness="0" Background="#009688" Width="135"  Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5"  Foreground="White" Command="{Binding TestCommand}"/>
         </StackPanel>
     </Grid>
 </Window>

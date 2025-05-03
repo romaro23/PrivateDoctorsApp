@@ -26,7 +26,7 @@
                   ItemsSource="{Binding ScheduleDates}"
                   materialDesign:HintAssist.Hint="Дата">
         </ComboBox>
-        <materialDesign:TimePicker SelectedTime="{Binding AppointmentStart, Mode=TwoWay}" Grid.Row="1"
+        <materialDesign:TimePicker Is24Hours="True" SelectedTime="{Binding AppointmentStart, Mode=TwoWay}" Grid.Row="1"
                                    Width="200"
                                    BorderThickness="2"
                                    BorderBrush="Gray"
@@ -35,7 +35,7 @@
                                    materialDesign:HintAssist.Hint="Початок зустрічі"
                                    materialDesign:TextFieldAssist.HasClearButton="True"
         />
-        <materialDesign:TimePicker SelectedTime="{Binding AppointmentEnd, Mode=TwoWay}" Grid.Row="2"
+        <materialDesign:TimePicker Is24Hours="True" SelectedTime="{Binding AppointmentEnd, Mode=TwoWay}" Grid.Row="2"
                            
                                    Width="200"
                                    BorderThickness="2"

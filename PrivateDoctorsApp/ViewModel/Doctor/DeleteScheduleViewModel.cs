@@ -119,9 +119,9 @@ namespace PrivateDoctorsApp.ViewModel
                     {
                         ScheduleDates = new ObservableCollection<DateTime?>(
                             (from s in context.Schedules
-                                where s.DoctorID == CurrentUser.ID
+                                where s.DoctorID == CurrentUser.ID && s.PatientID == null
                                 orderby s.WorkDate
-                                select s.WorkDate)
+                                select s.WorkDate).Distinct()
                             .ToList());
                     }
                 }

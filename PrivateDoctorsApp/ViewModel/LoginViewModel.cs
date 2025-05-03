@@ -9,13 +9,17 @@ using PrivateDoctorsApp.View;
 using PrivateDoctorsApp.View.Doctor;
 using PrivateDoctorsApp.View.Patient;
 using AdminMainWindow = PrivateDoctorsApp.View.Admin.AdminMainWindow;
+using System.Globalization;
+using System.Net;
+using System.Text.RegularExpressions;
+using System.Windows.Media;
 
 namespace PrivateDoctorsApp.ViewModel
 {
     internal class LoginViewModel : LogEventBase, INotifyPropertyChanged
     {
-        private string _username = "admin";
-        private string _password = "admin";
+        private string _username = "koval_olena";
+        private string _password = "password123";
         private string
             _newUsername,
             _newPassword,
@@ -141,25 +145,136 @@ namespace PrivateDoctorsApp.ViewModel
             LoginCommand = new RelayCommand(ExecuteLogin, CanLogin);
             RegCommand = new RelayCommand(ExecuteReg, CanRegister);
             RecoveryCommand = new RelayCommand(ExecuteRecovery);
+            CheckAppointments();
         }
+        private bool IsValidLastName() =>
+            !string.IsNullOrWhiteSpace(LastName);
 
+        private bool IsValidFirstName() =>
+            !string.IsNullOrWhiteSpace(FirstName);
+
+        private bool IsValidMiddleName() =>
+            !string.IsNullOrWhiteSpace(MiddleName);
+
+        private bool IsValidEmail() =>
+            !string.IsNullOrWhiteSpace(Email) &&
+            Regex.IsMatch(Email, @"^[\w\.-]+@[\w\.-]+\.\w+$");
+
+        private bool IsValidPhone() =>
+            !string.IsNullOrWhiteSpace(Phone) &&
+            Regex.IsMatch(Phone, @"^\+?\d{10,15}$");
+
+        private bool IsValidUsername() =>
+            !string.IsNullOrWhiteSpace(Username);
+
+        private bool IsValidPassword() =>
+            !string.IsNullOrWhiteSpace(Password);
+        private bool IsValidNewUsername() =>
+            !string.IsNullOrWhiteSpace(NewUsername);
+
+        private bool IsValidNewPassword() =>
+            !string.IsNullOrWhiteSpace(NewPassword);
+        private bool IsValidDateOfBirth() =>
+            DateOfBirth.HasValue;
+        public ICommand ValidateLastNameCommand => new RelayCommand(_ =>
+        {
+            if (!IsValidLastName())
+                ShowWarning("Прізвище не може бути порожнім.");
+        });
+        public ICommand ValidateFirstNameCommand => new RelayCommand(_ =>
+        {
+            if (!IsValidFirstName())
+                ShowWarning("Ім'я не може бути порожнім.");
+        });
+        public ICommand ValidateMiddleNameCommand => new RelayCommand(_ =>
+        {
+            if (!IsValidMiddleName())
+                ShowWarning("По-батькові не може бути порожнім.");
+        });
+        public ICommand ValidateEmailCommand => new RelayCommand(_ =>
+        {
+            if (!IsValidEmail())
+                ShowWarning("Невірний формат Email.");
+        });
+
+        public ICommand ValidatePhoneCommand => new RelayCommand(_ =>
+        {
+            if (!IsValidPhone())
+                ShowWarning("Невірний формат номера телефону.");
+        });
+        public ICommand ValidateUsernameCommand => new RelayCommand(_ =>
+        {
+            if (!IsValidUsername())
+                ShowWarning("Логін не може бути порожнім.");
+        });
+        public ICommand ValidatePasswordCommand => new RelayCommand(_ =>
+        {
+            if (!IsValidPassword())
+                ShowWarning("Пароль не може бути порожнім.");
+        });
+        public ICommand ValidateNewUsernameCommand => new RelayCommand(_ =>
+        {
+            if (!IsValidNewUsername())
+                ShowWarning("Логін не може бути порожнім.");
+        });
+        public ICommand ValidateNewPasswordCommand => new RelayCommand(_ =>
+        {
+            if (!IsValidNewPassword())
+                ShowWarning("Пароль не може бути порожнім.");
+        });
+        public ICommand ValidateDateOfBirthCommand => new RelayCommand(_ =>
+        {
+            if (!IsValidDateOfBirth())
+                ShowWarning("Дата народження не може бути порожньою.");
+        });
+        private void ShowWarning(string message)
+        {
+            MessageBox.Show(message, "Попередження", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
         private bool CanRegister()
         {
-            return !string.IsNullOrWhiteSpace(FirstName) &&
-                   !string.IsNullOrWhiteSpace(LastName) &&
-                   !string.IsNullOrWhiteSpace(Email) &&
-                   !string.IsNullOrWhiteSpace(MiddleName) &&
-                   !string.IsNullOrWhiteSpace(Phone) &&
-                   !string.IsNullOrWhiteSpace(NewUsername) &&
-                   !string.IsNullOrWhiteSpace(NewPassword) &&
-                   DateOfBirth.HasValue;
+            return IsValidFirstName() &&
+                   IsValidLastName() &&
+                   IsValidMiddleName() &&
+                   IsValidEmail() &&
+                   IsValidPhone() &&
+                   IsValidNewUsername() &&
+                   IsValidNewPassword() &&
+                   IsValidDateOfBirth();
         }
 
         private bool CanLogin()
         {
-            return !string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password);
+            return IsValidUsername() && IsValidPassword();
         }
 
+        private void CheckAppointments()
+        {
+            try
+            {
+                using (var context = new PrivateDoctorsDBEntities1())
+                {
+                    if (context.Database.Connection.State != System.Data.ConnectionState.Open)
+                        context.Database.Connection.Open();
+                    if (context.Database.Connection.State == System.Data.ConnectionState.Open)
+                    {
+                        var today = DateTime.Today;
+                        foreach (var appointment in context.Appointments)
+                        {
+                            if (appointment.AppointmentDate < today && appointment.Status == "pending")
+                            {
+                                appointment.Status = "confirmed";
+                            }
+                        }
+                        context.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Сталася помилка при з'єднанні з БД: " + ex.Message, "Попередження", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
         private void ExecuteLogin(object parameter)
         {
             try
@@ -253,10 +368,9 @@ namespace PrivateDoctorsApp.ViewModel
 
                         context.Patients.Add(newPatient);
                         context.SaveChanges();
-                        var patient = context.Patients.FirstOrDefault(p => p.Email == Email);
                         var newUser = new User
                         {
-                            PatientID = patient.ID,
+                            PatientID = newPatient.ID,
                             Password = NewPassword,
                             Username = NewUsername,
                             Role = "patient"

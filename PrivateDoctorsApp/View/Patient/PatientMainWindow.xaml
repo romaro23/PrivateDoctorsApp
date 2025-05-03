@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Icon="../../Assets/Main.ico"
-        Title="Головна сторінка" Height="700" Width="1100" Background="#FFD8DEE1" ResizeMode="NoResize">
+        Title="Пацієнт" Height="700" Width="1100" Background="#FFD8DEE1" ResizeMode="NoResize">
     <Grid>
         <Grid VerticalAlignment="Top" Background="White" Height="55" Width="1100">
             <Grid.Effect>
@@ -21,7 +21,21 @@
            FontWeight="Bold"
            Foreground="#009688"/>
             </StackPanel>
-            <Button  FontFamily="Segoe UI" FontWeight="Black" Content="Вийти" Margin="0,0,30,0" HorizontalAlignment="Right" BorderThickness="0" Background="#FFDE3333" Width="100" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5" Foreground="White" Command="{Binding LogoutCommand}"/>
+            <StackPanel Margin="0,0,30,0" Orientation="Horizontal" HorizontalAlignment="Right">
+                <StackPanel Margin="0,5">
+                    <TextBlock Text="{Binding Balance}" HorizontalAlignment="Center"
+                               FontSize="15"  
+                               FontFamily="Segoe UI" 
+                               FontWeight="Bold"
+                               Foreground="#009688" />
+                    <TextBlock Text="Ваш баланс" VerticalAlignment="Bottom" Margin="10, 0,10,5" 
+                               FontSize="15"  
+                               FontFamily="Segoe UI" 
+                               FontWeight="Bold"
+                               Foreground="#009688"/>
+                </StackPanel>
+                <Button  FontFamily="Segoe UI" FontWeight="Black" Content="Вийти"   BorderThickness="0" Background="#FFDE3333" Width="100" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5" Foreground="White" Command="{Binding LogoutCommand}"/>
+            </StackPanel>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="550" Background="White" Margin="0,60,0,22" Width="200">
             <Grid.Effect>

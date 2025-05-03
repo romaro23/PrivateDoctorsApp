@@ -17,6 +17,22 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -37,7 +53,22 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>0578C15F72A49714B9E7FBB6EFA1A27F850CBBF4</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>PrivateDoctorsApp_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bogus, Version=35.6.3.0, Culture=neutral, PublicKeyToken=fa1bb3f3f218129a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bogus.35.6.3\lib\net40\Bogus.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -110,6 +141,8 @@
     <Compile Include="ViewModel\Patient\PatientMainPageViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientMainViewModel.cs" />
     <Compile Include="ViewModel\Patient\PatientSearchViewModel.cs" />
+    <Compile Include="ViewModel\Patient\PatientViewDoctorsViewModel.cs" />
+    <Compile Include="ViewModel\Patient\PatientViewServicesViewModel.cs" />
     <Compile Include="View\Admin\AddDoctorToServiceWindow.xaml.cs">
       <DependentUpon>AddDoctorToServiceWindow.xaml</DependentUpon>
     </Compile>
@@ -140,17 +173,8 @@
     <Compile Include="View\Admin\AdminAccountancyPage.xaml.cs">
       <DependentUpon>AdminAccountancyPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Admin\AdminAppointmentsPage.xaml.cs">
-      <DependentUpon>AdminAppointmentsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Admin\AdminMainPage.xaml.cs">
-      <DependentUpon>AdminMainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Admin\AdminMainWindow.xaml.cs">
       <DependentUpon>AdminMainWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Admin\AdminSchedulesPage.xaml.cs">
-      <DependentUpon>AdminSchedulesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Doctor\ChangeScheduleWindow.xaml.cs">
       <DependentUpon>ChangeScheduleWindow.xaml</DependentUpon>
@@ -190,6 +214,12 @@
     </Compile>
     <Compile Include="View\Patient\PatientSearchPage.xaml.cs">
       <DependentUpon>PatientSearchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientViewDoctorsWindow.xaml.cs">
+      <DependentUpon>PatientViewDoctorsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientViewServicesWindow.xaml.cs">
+      <DependentUpon>PatientViewServicesWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -263,6 +293,7 @@
       <DependentUpon>PrivateDoctorsModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="PrivateDoctorsApp_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -271,7 +302,18 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Login.ico" />
     <Resource Include="Assets\Recovery.ico" />
@@ -337,19 +379,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Admin\AdminAppointmentsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Admin\AdminMainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Admin\AdminMainWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Admin\AdminSchedulesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -402,6 +432,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Patient\PatientSearchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientViewDoctorsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientViewServicesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -53,50 +54,28 @@ namespace PrivateDoctorsApp.ViewModel.Admin
                 OnPropertyChanged(nameof(Duration));
             }
         }
+        private bool IsValidServiceName() =>
+            !string.IsNullOrWhiteSpace(ServiceName);
+        private bool IsValidPrice() =>
+            !string.IsNullOrWhiteSpace(Price) &&
+            decimal.TryParse(Price, NumberStyles.Number, CultureInfo.InvariantCulture, out var parsedPrice) && parsedPrice > 0;
+        private bool IsValidDuration() =>
+            !string.IsNullOrWhiteSpace(Duration) &&
+            int.TryParse(Duration, out var parsedDuration) && parsedDuration > 0;
         public ICommand ValidateServiceNameCommand => new RelayCommand(_ =>
         {
-            if (string.IsNullOrWhiteSpace(ServiceName))
+            if (!IsValidServiceName())
                 ShowWarning("Послуга не може бути порожньою.");
         });
         public ICommand ValidatePriceCommand => new RelayCommand(_ =>
         {
-            if (string.IsNullOrWhiteSpace(Price))
-            {
-                ShowWarning("Ціна не може бути порожньою.");
-                return;
-            }
-
-            if (!decimal.TryParse(Price, out var parsedPrice))
-            {
-                ShowWarning("Ціна повинна бути числом.");
-                return;
-            }
-
-            if (parsedPrice <= 0)
-            {
-                ShowWarning("Ціна повинна бути більше нуля.");
-                return;
-            }
+            if (!IsValidPrice())
+                ShowWarning("Ціна не може бути порожньою і повинна бути числом більше нуля.");
         });
         public ICommand ValidateDurationCommand => new RelayCommand(_ =>
         {
-            if (string.IsNullOrWhiteSpace(Duration))
-            {
-                ShowWarning("Тривалість не може бути порожньою.");
-                return;
-            }
-
-            if (!int.TryParse(Duration, out var parsedDuration))
-            {
-                ShowWarning("Тривалість повинна бути числом.");
-                return;
-            }
-
-            if (parsedDuration <= 0)
-            {
-                ShowWarning("Тривалість повинна бути більше нуля.");
-                return;
-            }
+            if (!IsValidDuration())
+                ShowWarning("Тривалість не може бути порожньою і повинна бути числом більше нуля.");
         });
         private void ShowWarning(string message)
         {
@@ -105,9 +84,9 @@ namespace PrivateDoctorsApp.ViewModel.Admin
         public ICommand ChangeServiceCommand { get; }
         private bool CanChange()
         {
-            return !string.IsNullOrWhiteSpace(ServiceName) &&
-                   !string.IsNullOrWhiteSpace(Price) &&
-                   !string.IsNullOrWhiteSpace(Duration);
+            return IsValidServiceName() &&
+                   IsValidPrice() &&
+                   IsValidDuration();
         }
         public ChangeServiceViewModel(ChangeServiceWindow window, AdminServicesViewModel.ServiceItem service = null)
         {

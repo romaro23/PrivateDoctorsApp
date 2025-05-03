@@ -11,7 +11,6 @@ namespace PrivateDoctorsApp.View.Patient
         public PatientMainPage()
         {
             InitializeComponent();
-            DataContext = new PatientMainPageViewModel();
         }
     }
 }
