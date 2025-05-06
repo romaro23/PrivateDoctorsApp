@@ -92,7 +92,6 @@ namespace PrivateDoctorsApp.ViewModel.Admin
                             ServiceID = _service.ID
                         };
                         context.DoctorServices.Add(doctorService);
-                        var id = CurrentUser.ID;
                         OnLogEvent("Додано послугу до лікаря", "DoctorServices");
                         context.SaveChanges();
                     }

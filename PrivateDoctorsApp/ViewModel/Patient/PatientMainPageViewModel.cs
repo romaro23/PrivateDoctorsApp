@@ -163,23 +163,23 @@ namespace PrivateDoctorsApp.ViewModel
                         context.Database.Connection.Open();
                     if (context.Database.Connection.State == System.Data.ConnectionState.Open)
                     {
-                        var patient = context.Patients.FirstOrDefault(p => p.ID == CurrentUser.ID);
+                            var patient = context.Patients.FirstOrDefault(p => p.ID == CurrentUser.ID);
 
-                        if (patient != null)
-                        {
-                            patient.AccountBalance += Amount;
-                            var payment = new Model.Payment
+                            if (patient != null)
                             {
-                                Amount = Amount,
-                                DateOfPayment = DateTime.Now,
-                                PatientID = CurrentUser.ID
-                            };
-                            context.Payments.Add(payment);
-                            context.SaveChanges();
-                            OnLogEvent("Додано оплату", "Payments");
-                            DataUpdated?.Invoke();
-                            LoadPayments();
-                        }
+                                patient.AccountBalance += Amount;
+                                var payment = new Model.Payment
+                                {
+                                    Amount = Amount,
+                                    DateOfPayment = DateTime.Now,
+                                    PatientID = CurrentUser.ID
+                                };
+                                context.Payments.Add(payment);
+                                context.SaveChanges();
+                                OnLogEvent("Додано оплату", "Payments");
+                                DataUpdated?.Invoke();
+                                LoadPayments();
+                            }
                     }
                 }
             }

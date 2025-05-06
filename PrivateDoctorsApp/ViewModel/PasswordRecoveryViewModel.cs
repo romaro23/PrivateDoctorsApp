@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using PrivateDoctorsApp.Model;
@@ -33,9 +34,12 @@ namespace PrivateDoctorsApp.ViewModel
             RecoveryCommand = new RelayCommand(ExecuteRecovery, CanRecovery);
             _window = window;
         }
+        private bool IsValidEmail() =>
+            !string.IsNullOrWhiteSpace(Email) &&
+            Regex.IsMatch(Email, @"^[\w\.-]+@[\w\.-]+\.\w+$");
         private bool CanRecovery()
         {
-            return !string.IsNullOrWhiteSpace(Email);
+            return IsValidEmail();
         }
         private void ExecuteRecovery(object parameter)
         {

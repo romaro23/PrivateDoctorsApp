@@ -18,8 +18,8 @@ namespace PrivateDoctorsApp.ViewModel
 {
     internal class LoginViewModel : LogEventBase, INotifyPropertyChanged
     {
-        private string _username = "koval_olena";
-        private string _password = "password123";
+        private string _username = "sidorova";
+        private string _password = "password789";
         private string
             _newUsername,
             _newPassword,
@@ -296,14 +296,17 @@ namespace PrivateDoctorsApp.ViewModel
                                 {
                                     case "patient":
                                         CurrentUser.ID = user.PatientID;
+                                        CurrentUser.Role = user.Role;
                                         main = new PatientMainWindow();
                                         break;
                                     case "doctor":
                                         CurrentUser.ID = user.DoctorID;
+                                        CurrentUser.Role = user.Role;
                                         main = new DoctorMainWindow();
                                         break;
                                     case "admin":
                                         CurrentUser.ID = user.ID;
+                                        CurrentUser.Role = user.Role;
                                         main = new AdminMainWindow();
                                         break;
                                 }
@@ -363,7 +366,8 @@ namespace PrivateDoctorsApp.ViewModel
                             MiddleName = MiddleName,
                             BirthDate = DateOfBirth,
                             ContactNumber = Phone,
-                            Email = Email
+                            Email = Email,
+                            AccountBalance = 0
                         };
 
                         context.Patients.Add(newPatient);
@@ -377,6 +381,15 @@ namespace PrivateDoctorsApp.ViewModel
                         };
                         context.Users.Add(newUser);
                         context.SaveChanges();
+                        System.Windows.MessageBox.Show("Акаунт успішно створено.", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                        LastName = string.Empty;
+                        FirstName = string.Empty;
+                        MiddleName = string.Empty;
+                        Email = string.Empty;
+                        Phone = string.Empty;
+                        NewUsername = string.Empty;
+                        NewPassword = string.Empty;
+                        DateOfBirth = null;
                         OnLogEvent("Додано пацієнта", "Patients");
                         OnLogEvent("Додано акаунт пацієнта", "Users");
                     }

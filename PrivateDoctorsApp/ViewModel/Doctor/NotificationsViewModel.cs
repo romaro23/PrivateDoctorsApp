@@ -59,7 +59,7 @@ namespace PrivateDoctorsApp.ViewModel.Doctor
                         Notifications = new ObservableCollection<DoctorMainPageViewModel.Notification>(
                             (from n in context.Notifications
                                 join p in context.Patients on n.PatientID equals p.ID
-                                where n.DoctorID == CurrentUser.ID && (n.Type == "appointment" || n.Type == "cancellation") && (string.IsNullOrEmpty(patientName) || p.LastName + " " + p.FirstName == patientName)
+                                where n.DoctorID == CurrentUser.ID && (string.IsNullOrEmpty(patientName) || p.LastName + " " + p.FirstName == patientName)
                                 orderby n.DateOfCreation
                                 select new DoctorMainPageViewModel.Notification
                                 {

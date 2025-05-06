@@ -400,12 +400,19 @@ namespace PrivateDoctorsApp.ViewModel.Admin
                                 {
                                     var doctorServices = context.DoctorServices.Where(ds => ds.DoctorID == _id).ToList();
                                     context.DoctorServices.RemoveRange(doctorServices);
-
+                                    var schedules = context.Schedules.Where(s => s.DoctorID == _id).ToList();
+                                    context.Schedules.RemoveRange(schedules);
+                                    var notifications = context.Notifications.Where(n => n.DoctorID == _id).ToList();
+                                    context.Notifications.RemoveRange(notifications);
+                                    var appointments = context.Appointments.Where(a => a.DoctorID == _id).ToList();
+                                    context.Appointments.RemoveRange(appointments);
                                     var professional = context.Professionals.FirstOrDefault(p => p.EmployeeID == _id);
                                     if (professional != null)
                                         context.Professionals.Remove(professional);
 
                                     var user = context.Users.FirstOrDefault(u => u.DoctorID == _id);
+                                    var logs = context.Logs.Where(l => l.UserID == user.ID).ToList();
+                                    context.Logs.RemoveRange(logs);
                                     if (user != null)
                                         context.Users.Remove(user);
 
@@ -414,6 +421,7 @@ namespace PrivateDoctorsApp.ViewModel.Admin
                                     OnLogEvent("Видалено особисту інформацію лікаря", "Employee");
                                     OnLogEvent("Видалено професійну інформацію лікаря", "Professional");
                                     OnLogEvent("Видалено дані акаунта лікаря", "Users");
+                                    OnLogEvent("Видалено послугу у лікаря", "DoctorServices");
                                     DataUpdated?.Invoke();
                                 }
                             }

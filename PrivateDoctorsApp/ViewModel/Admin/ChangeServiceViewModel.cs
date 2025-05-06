@@ -177,11 +177,16 @@ namespace PrivateDoctorsApp.ViewModel.Admin
                             if (context.Database.Connection.State == System.Data.ConnectionState.Open)
                             {
                                 var service = context.Services.FirstOrDefault(s => s.ID == _id);
+                                var doctorServices = context.DoctorServices.Where(ds => ds.ServiceID == _id).ToList();
+                                var appointments = context.Appointments.Where(a => a.ServiceID == _id).ToList();
                                 if (service != null)
                                 {
                                     context.Services.Remove(service);
+                                    context.DoctorServices.RemoveRange(doctorServices);
+                                    context.Appointments.RemoveRange(appointments);
                                     context.SaveChanges();
                                     OnLogEvent("Видалено послугу", "Services");
+                                    OnLogEvent("Видалено послугу у лікаря", "DoctorServices");
                                     DataUpdated?.Invoke();
                                 }
                             }

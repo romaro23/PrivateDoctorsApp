@@ -103,18 +103,18 @@ namespace PrivateDoctorsApp.ViewModel.Admin
                         }
 
                         var result = (from e in context.Employees
-                            join a in context.Appointments on e.ID equals a.DoctorID
                             select new
                             {
                                 DoctorName = e.FirstName + " " + e.LastName,
-                                Appointment = a.ID
+                                Address = e.Address
                             }).ToList();
                         sw.Stop();
                         AllocConsole();
-                        Console.WriteLine($"Час виконання запитів до багатьох даних: {sw.ElapsedMilliseconds} мс");
+                        Console.WriteLine($"Час виконання запиту на вставку 1000 записів та вибірку {result.Count} записів: {sw.ElapsedMilliseconds} мс");
                     }
                 }
                 var newSw = Stopwatch.StartNew();
+                int count = 0;
                 Parallel.For(0, 50, i =>
                 {
                     using (var context = new PrivateDoctorsDBEntities1())
@@ -123,18 +123,18 @@ namespace PrivateDoctorsApp.ViewModel.Admin
                             context.Database.Connection.Open();
                         if (context.Database.Connection.State == System.Data.ConnectionState.Open)
                         {
-                            var newResult = (from e in context.Patients
-                                join a in context.Appointments on e.ID equals a.PatientID
+                            var newResult = (from e in context.Employees
                                 select new
                                 {
-                                    PName = e.FirstName + " " + e.LastName,
-                                    Appointment = a.ID
+                                    DoctorName = e.FirstName + " " + e.LastName,
+                                    Address = e.Address
                                 }).ToList();
+                            count = newResult.Count;
                         }
                     }
                 });
                 newSw.Stop();
-                Console.WriteLine($"Час виконання запитів від багатьох користувачів: {newSw.ElapsedMilliseconds} мс");
+                Console.WriteLine($"Час виконання запитів на вибірку від 50 користувачів {count} записів {newSw.ElapsedMilliseconds} мс");
                 
             }
             catch (Exception ex)

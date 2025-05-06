@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-
+using System.Linq;
 namespace PrivateDoctorsApp.Model
 {
     public static class CurrentUser
     {
         public static int? ID {  get; set; }
+        public static string Role { get; set; }
         public static Dictionary<string, string> Status = new Dictionary<string, string>
         {
             { "pending", "Заплановано"},
@@ -31,9 +32,24 @@ namespace PrivateDoctorsApp.Model
                     {
                         if (ID != null)
                         {
+                            User user;
+                            if (Role == "patient")
+                            {
+                                user = context.Users.FirstOrDefault(u => u.DoctorID == null && u.PatientID == ID);
+                            }
+
+                            else if (Role == "doctor")
+                            {
+                                user = context.Users.FirstOrDefault(u => u.DoctorID == ID && u.PatientID == null);
+                            }
+
+                            else
+                            {
+                                user = context.Users.FirstOrDefault(u => u.DoctorID == null && u.PatientID == null);
+                            }
                             var newLog = new Model.Log
                             {
-                                UserID = (int)ID,
+                                UserID = user.ID,
                                 Action = action,
                                 TableName = tableName,
                                 Date = DateTime.Now

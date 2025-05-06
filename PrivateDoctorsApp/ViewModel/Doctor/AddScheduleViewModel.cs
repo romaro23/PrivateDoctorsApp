@@ -29,16 +29,21 @@ namespace PrivateDoctorsApp.ViewModel
             get => _appointmentStart;
             set
             {
-                if (_appointmentStart != value && value.Value.TimeOfDay >= TimeSpan.FromHours(8) && value.Value.TimeOfDay <= TimeSpan.FromHours(20))
+                if (value.HasValue)
                 {
-                    _appointmentStart = value;
-                    OnPropertyChanged(nameof(AppointmentStart));
+                    var time = value.Value.TimeOfDay;
+
+                    if (time >= TimeSpan.FromHours(8) && time <= TimeSpan.FromHours(20))
+                        _appointmentStart = value;
+                    else
+                        _appointmentStart = value.Value.Date.AddHours(8);
                 }
                 else
                 {
-                    _appointmentStart = value.Value.Date.AddHours(8);
-                    OnPropertyChanged(nameof(AppointmentStart));
+                    _appointmentStart = null;
                 }
+
+                OnPropertyChanged(nameof(AppointmentStart));
             }
         }
 
@@ -50,16 +55,21 @@ namespace PrivateDoctorsApp.ViewModel
             get => _appointmentEnd;
             set
             {
-                if (_appointmentEnd != value && value.Value.TimeOfDay >= TimeSpan.FromHours(8) && value.Value.TimeOfDay <= TimeSpan.FromHours(20))
+                if (value.HasValue)
                 {
-                    _appointmentEnd = value;
-                    OnPropertyChanged(nameof(AppointmentEnd));
+                    var time = value.Value.TimeOfDay;
+
+                    if (time >= TimeSpan.FromHours(8) && time <= TimeSpan.FromHours(20))
+                        _appointmentEnd = value;
+                    else
+                        _appointmentEnd = value.Value.Date.AddHours(20);
                 }
                 else
                 {
-                    _appointmentEnd = value.Value.Date.AddHours(20);
-                    OnPropertyChanged(nameof(AppointmentEnd));
+                    _appointmentEnd = null;
                 }
+
+                OnPropertyChanged(nameof(AppointmentEnd));
             }
         }
 
